@@ -183,7 +183,7 @@ const ContactPage = () => {
 
   return (
     <div className="pt-16">
-      {/* Enhanced Hero Section */}
+      {/* Enhanced Hero Section with Better Mobile Layout */}
       <ImprovedHeroSection 
         title={
           <>
