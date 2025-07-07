@@ -472,43 +472,44 @@ const ImprovedHeroSection = ({
         ))}
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-20 text-center text-white px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      {/* Main Content - Mobile Optimized */}
+      <div className="relative z-20 text-center text-white px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto pt-20 sm:pt-24 lg:pt-16"
         >
-          {/* Badge */}
-          <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
-            <span className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium border border-blue-400/30">
+          {/* Badge - Mobile Optimized */}
+          <motion.div variants={itemVariants} className="mb-4 sm:mb-6 lg:mb-8">
+            <span className="inline-flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-lg px-3 sm:px-4 lg:px-6 py-1.5 sm:py-2 lg:py-3 rounded-full text-xs sm:text-sm font-medium border border-blue-400/30">
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" />
-              <span className="truncate">{subtitle}</span>
+              <span className="hidden sm:inline">{subtitle}</span>
+              <span className="sm:hidden text-xs">Manufacturing Intelligence</span>
             </span>
           </motion.div>
 
-          {/* Main Title */}
+          {/* Main Title - Mobile Optimized */}
           <motion.h1 
             variants={itemVariants}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 sm:mb-8 leading-tight px-2"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight px-2 sm:px-4 lg:px-0"
           >
             {title}
           </motion.h1>
           
-          {/* Subtitle */}
+          {/* Subtitle - Mobile Optimized */}
           <motion.p 
             variants={itemVariants}
-            className="text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-12 text-gray-300 leading-relaxed max-w-3xl mx-auto px-4"
+            className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 sm:mb-8 lg:mb-12 text-gray-300 leading-relaxed max-w-4xl mx-auto px-2 sm:px-4 lg:px-0"
           >
             {description}
           </motion.p>
 
-          {/* Key Metrics - Only for home page */}
+          {/* Key Metrics - Mobile Optimized */}
           {showMetrics && heroType === "default" && (
             <motion.div 
               variants={itemVariants}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 max-w-4xl mx-auto"
+              className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8 lg:mb-12 max-w-5xl mx-auto"
             >
               {[
                 { number: "99.9%", label: "System Uptime", icon: TrendingUp, color: "text-green-400" },
@@ -519,20 +520,20 @@ const ImprovedHeroSection = ({
                 <motion.div
                   key={index}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center"
+                  className="bg-white/5 backdrop-blur-lg rounded-xl lg:rounded-2xl p-3 sm:p-4 lg:p-6 border border-white/10 text-center"
                 >
-                  <stat.icon className={`w-8 h-8 ${stat.color} mx-auto mb-2`} />
-                  <div className={`text-3xl font-bold mb-1 ${stat.color}`}>{stat.number}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
+                  <stat.icon className={`w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 ${stat.color} mx-auto mb-1 sm:mb-2`} />
+                  <div className={`text-lg sm:text-2xl lg:text-3xl font-bold mb-1 ${stat.color}`}>{stat.number}</div>
+                  <div className="text-xs sm:text-sm text-gray-400">{stat.label}</div>
                 </motion.div>
               ))}
             </motion.div>
           )}
           
-          {/* Action Buttons */}
+          {/* Action Buttons - Mobile Optimized */}
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center max-w-lg sm:max-w-none mx-auto"
           >
             <motion.a
               href={primaryButtonLink}
@@ -541,28 +542,28 @@ const ImprovedHeroSection = ({
                 boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)" 
               }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 flex items-center justify-center gap-3"
+              className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base lg:text-lg shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3"
             >
-              <Play size={20} />
-              {primaryButtonText}
+              <Play size={16} className="sm:w-5 sm:h-5" />
+              <span className="truncate">{primaryButtonText}</span>
             </motion.a>
             
             <motion.a
               href={secondaryButtonLink}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white/10 backdrop-blur-lg border border-white/20 text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-3"
+              className="w-full sm:w-auto bg-white/10 backdrop-blur-lg border border-white/20 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base lg:text-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3"
             >
-              {secondaryButtonText}
-              <ArrowRight size={20} />
+              <span className="truncate">{secondaryButtonText}</span>
+              <ArrowRight size={16} className="sm:w-5 sm:h-5" />
             </motion.a>
           </motion.div>
 
-          {/* Trust Badges - Only for home page */}
+          {/* Trust Badges - Mobile Optimized */}
           {heroType === "default" && (
             <motion.div 
               variants={itemVariants}
-              className="flex flex-wrap justify-center items-center gap-8 mt-12 text-gray-400"
+              className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 lg:gap-8 mt-8 sm:mt-10 lg:mt-12 text-gray-400"
             >
               {[
                 { icon: Award, text: "FDA Validated" },
@@ -570,9 +571,9 @@ const ImprovedHeroSection = ({
                 { icon: CheckCircle, text: "GxP Compliant" },
                 { icon: Star, text: "Industry Leader" }
               ].map((badge, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <badge.icon className="w-5 h-5" />
-                  <span className="text-sm">{badge.text}</span>
+                <div key={index} className="flex items-center gap-1 sm:gap-2">
+                  <badge.icon className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+                  <span className="text-xs sm:text-sm">{badge.text}</span>
                 </div>
               ))}
             </motion.div>
