@@ -342,12 +342,19 @@ const ImprovedHeroSection = ({
         </div>
       </div>
 
-      {/* Floating Cards */}
+      {/* Floating Cards - Desktop Only, Properly Positioned */}
       {floatingCards.map((card, index) => (
         <motion.div
           key={index}
-          className="absolute z-10 hidden lg:block"
-          style={card.position}
+          className="absolute z-10 hidden xl:block"
+          style={{
+            ...card.position,
+            // Ensure cards don't overlap with main content
+            ...(card.position.top && parseFloat(card.position.top) < 40 ? { top: '10%' } : {}),
+            ...(card.position.bottom && parseFloat(card.position.bottom) < 30 ? { bottom: '15%' } : {}),
+            ...(card.position.left && parseFloat(card.position.left) < 15 ? { left: '5%' } : {}),
+            ...(card.position.right && parseFloat(card.position.right) < 15 ? { right: '5%' } : {})
+          }}
           variants={cardVariants}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
@@ -365,14 +372,14 @@ const ImprovedHeroSection = ({
               ease: "easeInOut",
               delay: card.delay
             }}
-            className={`bg-gradient-to-r ${card.gradient} p-4 rounded-2xl backdrop-blur-lg shadow-2xl border border-white/20 min-w-[180px]`}
+            className={`bg-gradient-to-r ${card.gradient} p-3 lg:p-4 rounded-xl lg:rounded-2xl backdrop-blur-lg shadow-2xl border border-white/20 min-w-[160px] lg:min-w-[180px]`}
           >
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                <card.icon className="w-5 h-5 text-white" />
+            <div className="flex items-center gap-2 lg:gap-3 mb-1 lg:mb-2">
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-white/20 rounded-full flex items-center justify-center">
+                <card.icon className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
               </div>
               <div>
-                <h4 className="text-white font-semibold text-sm">{card.title}</h4>
+                <h4 className="text-white font-semibold text-xs lg:text-sm">{card.title}</h4>
                 <p className="text-white/70 text-xs">{card.subtitle}</p>
               </div>
             </div>
