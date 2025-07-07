@@ -169,7 +169,7 @@ const ImprovedHeroSection = ({
             icon: Brain,
             title: "AI-Powered Analytics",
             subtitle: "Predictive Intelligence",
-            position: { top: '15%', left: '8%' },
+            position: { top: '8%', left: '3%' },
             delay: 0,
             gradient: "from-blue-500 to-cyan-500"
           },
@@ -177,7 +177,7 @@ const ImprovedHeroSection = ({
             icon: Shield,
             title: "GxP Compliance",
             subtitle: "Regulatory Excellence",
-            position: { top: '20%', right: '10%' },
+            position: { top: '12%', right: '3%' },
             delay: 0.5,
             gradient: "from-green-500 to-emerald-500"
           },
@@ -185,7 +185,7 @@ const ImprovedHeroSection = ({
             icon: Activity,
             title: "Real-time Monitoring",
             subtitle: "24/7 Operations",
-            position: { bottom: '25%', left: '12%' },
+            position: { bottom: '20%', left: '3%' },
             delay: 1,
             gradient: "from-purple-500 to-pink-500"
           },
@@ -193,7 +193,7 @@ const ImprovedHeroSection = ({
             icon: Factory,
             title: "Smart Manufacturing",
             subtitle: "Industry 4.0/5.0",
-            position: { bottom: '30%', right: '8%' },
+            position: { bottom: '25%', right: '3%' },
             delay: 1.5,
             gradient: "from-orange-500 to-red-500"
           }
