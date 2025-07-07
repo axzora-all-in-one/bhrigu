@@ -49,6 +49,80 @@ const fadeInUp = {
   transition: { duration: 0.8, ease: "easeOut" }
 };
 
+// Enhanced 3D Floating Card Animation Component
+const FloatingCard3D = ({ children, delay = 0, direction = 1 }) => {
+  return (
+    <motion.div
+      initial={{ 
+        opacity: 0, 
+        rotateY: -30, 
+        rotateX: 15, 
+        z: -100,
+        scale: 0.8 
+      }}
+      whileInView={{ 
+        opacity: 1, 
+        rotateY: 0, 
+        rotateX: 0, 
+        z: 0,
+        scale: 1 
+      }}
+      whileHover={{ 
+        rotateY: direction * 10, 
+        rotateX: 5, 
+        z: 50,
+        scale: 1.05,
+        transition: { duration: 0.3 }
+      }}
+      transition={{ 
+        duration: 1, 
+        delay,
+        type: "spring",
+        stiffness: 100
+      }}
+      style={{
+        transformStyle: "preserve-3d",
+        perspective: "1000px"
+      }}
+      animate={{
+        y: [0, -10, 0],
+        rotateY: [0, direction * 2, 0],
+      }}
+      transition={{
+        y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+        rotateY: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+// Modern 3D Glass Card Component
+const GlassCard3D = ({ icon: Icon, title, description, color, delay = 0 }) => {
+  return (
+    <FloatingCard3D delay={delay}>
+      <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-2xl hover:shadow-3xl transition-all duration-300"
+           style={{
+             background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
+             backdropFilter: "blur(10px)",
+             boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)"
+           }}>
+        <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${color} flex items-center justify-center shadow-lg`}
+             style={{ transform: "translateZ(20px)" }}>
+          <Icon className="w-8 h-8 text-white" />
+        </div>
+        <h3 className="text-xl font-bold text-white mb-3" style={{ transform: "translateZ(10px)" }}>
+          {title}
+        </h3>
+        <p className="text-gray-300 leading-relaxed" style={{ transform: "translateZ(5px)" }}>
+          {description}
+        </p>
+      </div>
+    </FloatingCard3D>
+  );
+};
+
 const staggerChildren = {
   animate: {
     transition: {
