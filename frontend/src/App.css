@@ -186,7 +186,7 @@
 
 /* Enhanced custom gradients */
 .bg-gradient-primary {
-  background: linear-gradient(135deg, #0066ff 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #0066ff 0%, #00ffff 100%);
 }
 
 .bg-gradient-secondary {
@@ -198,7 +198,11 @@
 }
 
 .bg-gradient-hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background: linear-gradient(135deg, #0066ff 0%, #00ffff 50%, #00ff7f 100%);
+}
+
+.bg-gradient-bhrigu {
+  background: linear-gradient(135deg, #0066ff 0%, #00ffff 100%);
 }
 
 /* Enhanced typography */
