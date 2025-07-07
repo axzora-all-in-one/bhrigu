@@ -28,6 +28,7 @@ import {
   TrendingUp,
   CheckCircle
 } from 'lucide-react';
+import ImprovedHeroSection from '../components/ImprovedHeroSection';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -69,50 +70,25 @@ const AnimatedSection = ({ children, className = "" }) => {
 const TechnologyPage = () => {
   return (
     <div className="pt-16">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `linear-gradient(135deg, rgba(0, 102, 255, 0.9) 0%, rgba(139, 92, 246, 0.8) 100%), url('https://images.pexels.com/photos/7663144/pexels-photo-7663144.jpeg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed'
-          }}
-        />
-        
-        <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="max-w-5xl mx-auto"
-          >
-            <motion.h1 
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-            >
-              Advanced Platform
-              <br />
-              <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
-                Architecture
-              </span>
-            </motion.h1>
-            
-            <motion.p 
-              className="text-xl sm:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              Cutting-edge technologies powering the future of regulated manufacturing 
-              with AI, IoT, and cloud-native architecture.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
+      {/* Enhanced Hero Section */}
+      <ImprovedHeroSection 
+        title={
+          <>
+            Advanced Platform
+            <br />
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+              Architecture
+            </span>
+          </>
+        }
+        subtitle="Next-Generation Technology Stack for Regulated Industries"
+        description="Cutting-edge technologies powering the future of regulated manufacturing with AI, IoT, and cloud-native architecture. Built for scale, security, and seamless compliance."
+        primaryButtonText="Explore Technology"
+        primaryButtonLink="/solutions"
+        secondaryButtonText="Schedule Technical Demo"
+        secondaryButtonLink="/contact"
+        heroType="technology"
+      />
 
       {/* Core Architecture */}
       <AnimatedSection className="py-24 bg-gradient-to-br from-gray-50 to-white">
@@ -142,19 +118,22 @@ const TechnologyPage = () => {
                 title: "Microservices Architecture", 
                 icon: Layers, 
                 desc: "Scalable, distributed system design",
-                features: ["Independent services", "API-first approach", "Container orchestration", "Auto-scaling"]
+                features: ["Independent services", "API-first approach", "Container orchestration", "Auto-scaling"],
+                color: "from-blue-500 to-cyan-500"
               },
               { 
                 title: "Event-Driven Processing", 
                 icon: Workflow, 
                 desc: "Real-time data processing and automation",
-                features: ["Message queues", "Event sourcing", "Stream processing", "Reactive systems"]
+                features: ["Message queues", "Event sourcing", "Stream processing", "Reactive systems"],
+                color: "from-purple-500 to-pink-500"
               },
               { 
                 title: "Security Framework", 
                 icon: Shield, 
                 desc: "Enterprise-grade security and compliance",
-                features: ["Zero-trust architecture", "End-to-end encryption", "Role-based access", "Audit logging"]
+                features: ["Zero-trust architecture", "End-to-end encryption", "Role-based access", "Audit logging"],
+                color: "from-green-500 to-emerald-500"
               }
             ].map((component, index) => (
               <motion.div
@@ -163,7 +142,9 @@ const TechnologyPage = () => {
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
               >
-                <component.icon className="w-12 h-12 text-blue-600 mb-6" />
+                <div className={`w-16 h-16 mb-6 rounded-2xl bg-gradient-to-r ${component.color} flex items-center justify-center`}>
+                  <component.icon className="w-8 h-8 text-white" />
+                </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">{component.title}</h3>
                 <p className="text-gray-600 mb-6">{component.desc}</p>
                 <ul className="space-y-2">
@@ -205,17 +186,19 @@ const TechnologyPage = () => {
                 className="grid grid-cols-2 gap-6"
               >
                 {[
-                  { title: "Predictive Maintenance", icon: Gauge, desc: "AI-powered equipment monitoring" },
-                  { title: "Quality Prediction", icon: Target, desc: "ML models for quality assurance" },
-                  { title: "Anomaly Detection", icon: Eye, desc: "Real-time anomaly identification" },
-                  { title: "Process Optimization", icon: TrendingUp, desc: "Continuous improvement algorithms" }
+                  { title: "Predictive Maintenance", icon: Gauge, desc: "AI-powered equipment monitoring", color: "from-blue-500 to-cyan-500" },
+                  { title: "Quality Prediction", icon: Target, desc: "ML models for quality assurance", color: "from-green-500 to-emerald-500" },
+                  { title: "Anomaly Detection", icon: Eye, desc: "Real-time anomaly identification", color: "from-purple-500 to-pink-500" },
+                  { title: "Process Optimization", icon: TrendingUp, desc: "Continuous improvement algorithms", color: "from-orange-500 to-red-500" }
                 ].map((feature, index) => (
                   <motion.div
                     key={index}
                     variants={scaleIn}
                     className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    <feature.icon className="w-8 h-8 text-blue-600 mb-3" />
+                    <div className={`w-12 h-12 mb-3 rounded-xl bg-gradient-to-r ${feature.color} flex items-center justify-center`}>
+                      <feature.icon className="w-6 h-6 text-white" />
+                    </div>
                     <h4 className="font-semibold text-gray-900 mb-2">{feature.title}</h4>
                     <p className="text-sm text-gray-600">{feature.desc}</p>
                   </motion.div>
@@ -268,19 +251,22 @@ const TechnologyPage = () => {
                 title: "Sensor Integration",
                 icon: Wifi,
                 desc: "Connect thousands of industrial sensors",
-                features: ["Wireless protocols", "Industrial standards", "Real-time data", "Self-healing networks"]
+                features: ["Wireless protocols", "Industrial standards", "Real-time data", "Self-healing networks"],
+                color: "from-cyan-500 to-blue-500"
               },
               {
                 title: "Edge Computing",
                 icon: Server,
                 desc: "Local processing and intelligent filtering",
-                features: ["Low latency", "Offline capability", "Data preprocessing", "Local analytics"]
+                features: ["Low latency", "Offline capability", "Data preprocessing", "Local analytics"],
+                color: "from-orange-500 to-red-500"
               },
               {
                 title: "Real-time Monitoring",
                 icon: Activity,
                 desc: "Live dashboards and instant alerts",
-                features: ["Live dashboards", "Instant alerts", "Trend analysis", "Historical data"]
+                features: ["Live dashboards", "Instant alerts", "Trend analysis", "Historical data"],
+                color: "from-green-500 to-emerald-500"
               }
             ].map((feature, index) => (
               <motion.div
@@ -289,7 +275,9 @@ const TechnologyPage = () => {
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-300"
               >
-                <feature.icon className="w-12 h-12 text-cyan-400 mb-6" />
+                <div className={`w-16 h-16 mb-6 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center`}>
+                  <feature.icon className="w-8 h-8 text-white" />
+                </div>
                 <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
                 <p className="text-gray-300 mb-6">{feature.desc}</p>
                 <ul className="space-y-2">
@@ -345,10 +333,10 @@ const TechnologyPage = () => {
                 className="space-y-6"
               >
                 {[
-                  { title: "Interactive Dashboards", icon: Monitor, progress: 95 },
-                  { title: "Trend Analysis", icon: BarChart3, progress: 90 },
-                  { title: "Performance Metrics", icon: Gauge, progress: 88 },
-                  { title: "Predictive Insights", icon: Brain, progress: 92 }
+                  { title: "Interactive Dashboards", icon: Monitor, progress: 95, color: "from-blue-500 to-cyan-500" },
+                  { title: "Trend Analysis", icon: BarChart3, progress: 90, color: "from-green-500 to-emerald-500" },
+                  { title: "Performance Metrics", icon: Gauge, progress: 88, color: "from-purple-500 to-pink-500" },
+                  { title: "Predictive Insights", icon: Brain, progress: 92, color: "from-orange-500 to-red-500" }
                 ].map((metric, index) => (
                   <motion.div
                     key={index}
@@ -356,13 +344,15 @@ const TechnologyPage = () => {
                     className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     <div className="flex items-center gap-4 mb-3">
-                      <metric.icon className="w-6 h-6 text-blue-600" />
+                      <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${metric.color} flex items-center justify-center`}>
+                        <metric.icon className="w-5 h-5 text-white" />
+                      </div>
                       <h4 className="font-semibold text-gray-900">{metric.title}</h4>
                       <span className="ml-auto text-sm text-gray-600">{metric.progress}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <motion.div 
-                        className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
+                        className={`bg-gradient-to-r ${metric.color} h-2 rounded-full`}
                         initial={{ width: 0 }}
                         animate={{ width: `${metric.progress}%` }}
                         transition={{ duration: 1, delay: index * 0.2 }}
@@ -400,14 +390,14 @@ const TechnologyPage = () => {
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
             {[
-              { title: "Auto-Scaling", icon: TrendingUp, desc: "Dynamic resource allocation" },
-              { title: "High Availability", icon: Shield, desc: "99.99% uptime guarantee" },
-              { title: "Global CDN", icon: Globe, desc: "Worldwide content delivery" },
-              { title: "Disaster Recovery", icon: HardDrive, desc: "Automated backup and recovery" },
-              { title: "Load Balancing", icon: Network, desc: "Intelligent traffic distribution" },
-              { title: "Security Monitoring", icon: Eye, desc: "24/7 threat detection" },
-              { title: "Compliance Ready", icon: CheckCircle, desc: "SOC 2, GDPR, HIPAA" },
-              { title: "Multi-Region", icon: Smartphone, desc: "Global deployment options" }
+              { title: "Auto-Scaling", icon: TrendingUp, desc: "Dynamic resource allocation", color: "from-blue-500 to-cyan-500" },
+              { title: "High Availability", icon: Shield, desc: "99.99% uptime guarantee", color: "from-green-500 to-emerald-500" },
+              { title: "Global CDN", icon: Globe, desc: "Worldwide content delivery", color: "from-purple-500 to-pink-500" },
+              { title: "Disaster Recovery", icon: HardDrive, desc: "Automated backup and recovery", color: "from-orange-500 to-red-500" },
+              { title: "Load Balancing", icon: Network, desc: "Intelligent traffic distribution", color: "from-indigo-500 to-purple-500" },
+              { title: "Security Monitoring", icon: Eye, desc: "24/7 threat detection", color: "from-teal-500 to-cyan-500" },
+              { title: "Compliance Ready", icon: CheckCircle, desc: "SOC 2, GDPR, HIPAA", color: "from-amber-500 to-orange-500" },
+              { title: "Multi-Region", icon: Smartphone, desc: "Global deployment options", color: "from-pink-500 to-rose-500" }
             ].map((feature, index) => (
               <motion.div
                 key={index}
@@ -415,73 +405,14 @@ const TechnologyPage = () => {
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 text-center"
               >
-                <feature.icon className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                <div className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-r ${feature.color} flex items-center justify-center`}>
+                  <feature.icon className="w-6 h-6 text-white" />
+                </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
                 <p className="text-gray-600 text-sm">{feature.desc}</p>
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </AnimatedSection>
-
-      {/* Integration Capabilities */}
-      <AnimatedSection className="py-24 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div variants={staggerChildren}>
-              <motion.h2 
-                variants={fadeInUp}
-                className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent"
-              >
-                Integration Capabilities
-              </motion.h2>
-              
-              <motion.p 
-                variants={fadeInUp}
-                className="text-lg text-gray-300 mb-8 leading-relaxed"
-              >
-                API documentation with interactive explorer, third-party system connections, 
-                and seamless legacy system migration paths.
-              </motion.p>
-              
-              <motion.div 
-                variants={staggerChildren}
-                className="space-y-4"
-              >
-                {[
-                  "RESTful API with OpenAPI 3.0 specification",
-                  "GraphQL endpoint for flexible data queries",
-                  "Webhook support for real-time notifications",
-                  "SDK libraries for popular programming languages",
-                  "Legacy system connectors and adapters",
-                  "Enterprise service bus integration"
-                ].map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    variants={fadeInUp}
-                    className="flex items-start gap-3"
-                  >
-                    <Code className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-lg text-gray-300">{feature}</span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-            
-            <motion.div
-              variants={scaleIn}
-              className="relative"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1598149852075-62ed16a6edb2"
-                  alt="Integration Architecture"
-                  className="w-full h-96 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-green-600/20 to-cyan-600/20"></div>
-              </div>
-            </motion.div>
-          </div>
         </div>
       </AnimatedSection>
 
@@ -506,10 +437,10 @@ const TechnologyPage = () => {
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
             {[
-              { number: "99.99%", label: "System Uptime", icon: "⚡" },
-              { number: "<100ms", label: "API Response Time", icon: "🚀" },
-              { number: "10M+", label: "Data Points/Second", icon: "📊" },
-              { number: "256-bit", label: "AES Encryption", icon: "🔒" }
+              { number: "99.99%", label: "System Uptime", icon: "⚡", color: "from-green-500 to-emerald-500" },
+              { number: "<100ms", label: "API Response Time", icon: "🚀", color: "from-blue-500 to-cyan-500" },
+              { number: "10M+", label: "Data Points/Second", icon: "📊", color: "from-purple-500 to-pink-500" },
+              { number: "256-bit", label: "AES Encryption", icon: "🔒", color: "from-orange-500 to-red-500" }
             ].map((metric, index) => (
               <motion.div
                 key={index}
@@ -518,7 +449,9 @@ const TechnologyPage = () => {
                 className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
               >
                 <div className="text-4xl mb-4">{metric.icon}</div>
-                <div className="text-3xl font-bold text-blue-600 mb-2">{metric.number}</div>
+                <div className={`text-3xl font-bold mb-2 bg-gradient-to-r ${metric.color} bg-clip-text text-transparent`}>
+                  {metric.number}
+                </div>
                 <div className="text-gray-600 font-medium">{metric.label}</div>
               </motion.div>
             ))}

@@ -29,6 +29,7 @@ import {
   Clock,
   Zap
 } from 'lucide-react';
+import ImprovedHeroSection from '../components/ImprovedHeroSection';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -70,50 +71,25 @@ const AnimatedSection = ({ children, className = "" }) => {
 const IndustriesPage = () => {
   return (
     <div className="pt-16">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `linear-gradient(135deg, rgba(0, 102, 255, 0.9) 0%, rgba(139, 92, 246, 0.8) 100%), url('https://images.pexels.com/photos/8532850/pexels-photo-8532850.jpeg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed'
-          }}
-        />
-        
-        <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="max-w-5xl mx-auto"
-          >
-            <motion.h1 
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-            >
-              Sector-Specific
-              <br />
-              <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
-                Excellence
-              </span>
-            </motion.h1>
-            
-            <motion.p 
-              className="text-xl sm:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              Specialized solutions for regulated industries that demand the highest 
-              standards of compliance and operational excellence.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
+      {/* Enhanced Hero Section */}
+      <ImprovedHeroSection 
+        title={
+          <>
+            Sector-Specific
+            <br />
+            <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
+              Excellence
+            </span>
+          </>
+        }
+        subtitle="Industry-Focused Innovation & Compliance Solutions"
+        description="Specialized solutions for regulated industries that demand the highest standards of compliance and operational excellence. From pharmaceuticals to biotechnology, we deliver tailored platforms that ensure regulatory success."
+        primaryButtonText="Explore Industry Solutions"
+        primaryButtonLink="/solutions"
+        secondaryButtonText="Get Industry Consultation"
+        secondaryButtonLink="/contact"
+        heroType="industries"
+      />
 
       {/* Pharmaceutical Section */}
       <AnimatedSection className="py-24 bg-gradient-to-br from-blue-50 to-indigo-50">
