@@ -423,7 +423,7 @@ const ProductShowcaseSection = () => {
           >
             <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
               <div className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-r ${products[activeProduct].color} flex items-center justify-center`}>
-                <products[activeProduct].icon className="w-10 h-10 text-white" />
+                {React.createElement(products[activeProduct].icon, { className: "w-10 h-10 text-white" })}
               </div>
               <h3 className="text-2xl font-bold text-center mb-4">{products[activeProduct].title}</h3>
               <p className="text-gray-300 text-center mb-6">{products[activeProduct].description}</p>
