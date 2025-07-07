@@ -25,7 +25,7 @@ import {
   Users,
   Gauge
 } from 'lucide-react';
-import ModernHeroSection from '../components/ModernHeroSection';
+import ImprovedHeroSection from '../components/ImprovedHeroSection';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -67,25 +67,24 @@ const AnimatedSection = ({ children, className = "" }) => {
 const SolutionsPage = () => {
   return (
     <div className="pt-16">
-      {/* Modern Hero Section */}
-      <ModernHeroSection
+      {/* Enhanced Hero Section */}
+      <ImprovedHeroSection 
         title={
           <>
             BhriguOne Platform
             <br />
-            <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
               Deep Dive
             </span>
           </>
         }
-        subtitle="Comprehensive AI-Powered Solutions"
+        subtitle="Comprehensive AI-Powered Manufacturing Solutions"
         description="Unified platform combining AI, IoT, and compliance automation specifically designed for regulated industries including pharmaceuticals, medical devices, food & beverage, and biotechnology."
         primaryButtonText="Explore Platform"
         primaryButtonLink="/contact"
         secondaryButtonText="View Demo"
         secondaryButtonLink="#platform-overview"
-        centerIcon={Settings}
-        backgroundGradient="from-blue-900 via-purple-900 to-indigo-900"
+        heroType="solutions"
       />
 
       {/* Platform Overview */}
@@ -215,9 +214,9 @@ const SolutionsPage = () => {
             className="grid md:grid-cols-3 gap-8"
           >
             {[
-              { title: "Sensor Integration", icon: Network, desc: "Connect all manufacturing sensors" },
-              { title: "Real-time Monitoring", icon: Eye, desc: "Live data visualization dashboards" },
-              { title: "Edge Computing", icon: Server, desc: "Local processing and analysis" }
+              { title: "Sensor Integration", icon: Network, desc: "Connect all manufacturing sensors", color: "from-cyan-500 to-blue-500" },
+              { title: "Real-time Monitoring", icon: Eye, desc: "Live data visualization dashboards", color: "from-green-500 to-emerald-500" },
+              { title: "Edge Computing", icon: Server, desc: "Local processing and analysis", color: "from-purple-500 to-pink-500" }
             ].map((feature, index) => (
               <motion.div
                 key={index}
@@ -225,7 +224,9 @@ const SolutionsPage = () => {
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-300"
               >
-                <feature.icon className="w-12 h-12 text-cyan-400 mb-4" />
+                <div className={`w-16 h-16 mb-4 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center`}>
+                  <feature.icon className="w-8 h-8 text-white" />
+                </div>
                 <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
                 <p className="text-gray-300">{feature.desc}</p>
               </motion.div>
@@ -257,10 +258,10 @@ const SolutionsPage = () => {
             className="grid md:grid-cols-2 gap-8"
           >
             {[
-              { title: "Data Lake Architecture", icon: Database, desc: "Scalable storage for structured and unstructured data" },
-              { title: "Real-time Processing", icon: Zap, desc: "Stream processing for immediate insights" },
-              { title: "Data Governance", icon: Shield, desc: "Compliance-ready data management" },
-              { title: "Advanced Analytics", icon: TrendingUp, desc: "Machine learning and statistical analysis" }
+              { title: "Data Lake Architecture", icon: Database, desc: "Scalable storage for structured and unstructured data", color: "from-blue-500 to-cyan-500" },
+              { title: "Real-time Processing", icon: Zap, desc: "Stream processing for immediate insights", color: "from-green-500 to-emerald-500" },
+              { title: "Data Governance", icon: Shield, desc: "Compliance-ready data management", color: "from-purple-500 to-pink-500" },
+              { title: "Advanced Analytics", icon: TrendingUp, desc: "Machine learning and statistical analysis", color: "from-orange-500 to-red-500" }
             ].map((feature, index) => (
               <motion.div
                 key={index}
@@ -268,7 +269,9 @@ const SolutionsPage = () => {
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
               >
-                <feature.icon className="w-12 h-12 text-blue-600 mb-4" />
+                <div className={`w-16 h-16 mb-4 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center`}>
+                  <feature.icon className="w-8 h-8 text-white" />
+                </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
                 <p className="text-gray-600">{feature.desc}</p>
               </motion.div>
@@ -283,7 +286,7 @@ const SolutionsPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               variants={scaleIn}
-              className="relative"
+              className="relative order-2 lg:order-1"
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
@@ -295,7 +298,7 @@ const SolutionsPage = () => {
               </div>
             </motion.div>
             
-            <motion.div variants={staggerChildren}>
+            <motion.div variants={staggerChildren} className="order-1 lg:order-2">
               <motion.h2 
                 variants={fadeInUp}
                 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
@@ -316,17 +319,19 @@ const SolutionsPage = () => {
                 className="grid grid-cols-2 gap-4"
               >
                 {[
-                  { title: "Production Planning", icon: Calendar },
-                  { title: "Resource Optimization", icon: Target },
-                  { title: "Quality Control", icon: CheckCircle },
-                  { title: "Performance Monitoring", icon: Gauge }
+                  { title: "Production Planning", icon: Calendar, color: "from-blue-500 to-cyan-500" },
+                  { title: "Resource Optimization", icon: Target, color: "from-green-500 to-emerald-500" },
+                  { title: "Quality Control", icon: CheckCircle, color: "from-purple-500 to-pink-500" },
+                  { title: "Performance Monitoring", icon: Gauge, color: "from-orange-500 to-red-500" }
                 ].map((feature, index) => (
                   <motion.div
                     key={index}
                     variants={scaleIn}
                     className="bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    <feature.icon className="w-8 h-8 text-blue-600 mb-2" />
+                    <div className={`w-10 h-10 mb-2 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center`}>
+                      <feature.icon className="w-5 h-5 text-white" />
+                    </div>
                     <h4 className="font-semibold text-gray-900">{feature.title}</h4>
                   </motion.div>
                 ))}
