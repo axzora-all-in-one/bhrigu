@@ -200,7 +200,7 @@ const ImprovedNavbar = () => {
                   <motion.a
                     href={item.path}
                     whileHover={{ scale: 1.05 }}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2 relative overflow-hidden group ${
+                    className={`px-3 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2 relative overflow-hidden group ${
                       isScrolled 
                         ? 'text-gray-700 hover:text-white' 
                         : 'text-white hover:text-white'
@@ -216,33 +216,8 @@ const ImprovedNavbar = () => {
                     <div className="relative z-10 flex items-center gap-2">
                       <item.icon size={16} />
                       {item.name}
-                      {item.dropdown && <ChevronDown size={14} />}
                     </div>
                   </motion.a>
-
-                  {/* Dropdown Menu */}
-                  <AnimatePresence>
-                    {item.dropdown && activeDropdown === item.name && (
-                      <motion.div
-                        variants={dropdownVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit="exit"
-                        className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-gray-200/50 py-2"
-                      >
-                        {item.dropdown.map((dropItem, index) => (
-                          <motion.a
-                            key={dropItem.name}
-                            href={dropItem.path}
-                            whileHover={{ x: 5 }}
-                            className="block px-4 py-3 text-sm text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-200 mx-2 rounded-xl"
-                          >
-                            {dropItem.name}
-                          </motion.a>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </div>
               ))}
             </div>
