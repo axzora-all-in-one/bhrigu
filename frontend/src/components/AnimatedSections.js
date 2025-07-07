@@ -272,24 +272,31 @@ const DataFlowSection = () => {
             />
           </svg>
 
-          {/* Data Nodes */}
-          <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: Database, title: "Data Collection", color: "from-blue-500 to-cyan-500", delay: 0 },
-              { icon: Brain, title: "AI Processing", color: "from-purple-500 to-pink-500", delay: 0.5 },
-              { icon: BarChart3, title: "Analytics", color: "from-green-500 to-emerald-500", delay: 1 },
-              { icon: Target, title: "Insights", color: "from-orange-500 to-red-500", delay: 1.5 }
-            ].map((node, index) => (
-              <FloatingElement key={index} delay={node.delay}>
-                <motion.div
-                  variants={scaleIn}
-                  className={`bg-gradient-to-r ${node.color} p-6 rounded-2xl text-white text-center shadow-2xl`}
-                >
-                  <node.icon className="w-12 h-12 mx-auto mb-4" />
-                  <h3 className="text-lg font-bold">{node.title}</h3>
-                </motion.div>
-              </FloatingElement>
-            ))}
+          {/* Data Nodes - Enhanced 3D Version */}
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <GlassCard3D
+              icon={Database}
+              title="Smart Data Collection"
+              description="IoT sensors and manufacturing systems continuously collect real-time operational data with advanced filtering and preprocessing"
+              color="from-blue-500 to-cyan-500"
+              delay={0.2}
+            />
+            
+            <GlassCard3D
+              icon={Brain}
+              title="AI-Powered Processing"
+              description="Advanced machine learning algorithms analyze patterns, predict outcomes, and optimize manufacturing processes in real-time"
+              color="from-purple-500 to-pink-500"
+              delay={0.4}
+            />
+            
+            <GlassCard3D
+              icon={BarChart3}
+              title="Actionable Insights"
+              description="Real-time dashboards, predictive alerts, and automated recommendations enable immediate decision-making and process optimization"
+              color="from-green-500 to-emerald-500"
+              delay={0.6}
+            />
           </div>
         </div>
       </div>
