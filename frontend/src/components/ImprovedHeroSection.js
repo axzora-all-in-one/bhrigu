@@ -387,10 +387,10 @@ const ImprovedHeroSection = ({
         </motion.div>
       ))}
 
-      {/* Central 3D Illustration - Only for home page and desktop */}
+      {/* Central 3D Illustration - Only for home page and desktop, positioned to not overlap */}
       {heroType === "default" && (
-        <div className="absolute inset-0 z-5 hidden xl:flex items-center justify-center">
-          <div className="relative w-80 h-80">
+        <div className="absolute inset-0 z-5 hidden 2xl:flex items-center justify-center">
+          <div className="relative w-64 h-64 xl:w-80 xl:h-80 mt-20">
             {/* Central Core */}
             <motion.div
               animate={{ 
@@ -401,22 +401,22 @@ const ImprovedHeroSection = ({
                 rotate: { duration: 40, repeat: Infinity, ease: "linear" },
                 scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }
               }}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full shadow-2xl flex items-center justify-center"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 xl:w-24 xl:h-24 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full shadow-2xl flex items-center justify-center"
             >
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                <Cpu className="w-8 h-8 text-white" />
+              <div className="w-12 h-12 xl:w-16 xl:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                <Cpu className="w-6 h-6 xl:w-8 xl:h-8 text-white" />
               </div>
             </motion.div>
 
             {/* Reduced Orbiting Elements */}
-            {centerElements.slice(0, 4).map((element, index) => {
-              const x = Math.cos((element.angle * Math.PI) / 180) * (element.radius * 0.8);
-              const y = Math.sin((element.angle * Math.PI) / 180) * (element.radius * 0.8);
+            {centerElements.slice(0, 3).map((element, index) => {
+              const x = Math.cos((element.angle * Math.PI) / 180) * (element.radius * 0.6);
+              const y = Math.sin((element.angle * Math.PI) / 180) * (element.radius * 0.6);
               
               return (
                 <motion.div
                   key={index}
-                  className="absolute top-1/2 left-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20"
+                  className="absolute top-1/2 left-1/2 w-10 h-10 xl:w-12 xl:h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20"
                   style={{
                     transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`
                   }}
@@ -429,7 +429,7 @@ const ImprovedHeroSection = ({
                     scale: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.8 }
                   }}
                 >
-                  <element.icon className={`w-6 h-6 ${element.color}`} />
+                  <element.icon className={`w-5 h-5 xl:w-6 xl:h-6 ${element.color}`} />
                 </motion.div>
               );
             })}
