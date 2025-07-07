@@ -147,7 +147,7 @@ const ImprovedNavbar = () => {
             >
               {/* Bhrigu Logo */}
               <div className="flex items-center gap-3">
-                {/* Logo Icon - recreating the geometric design */}
+                {/* Logo Icon - New geometric design */}
                 <div className="w-10 h-10 relative">
                   <svg viewBox="0 0 40 40" className="w-full h-full">
                     <defs>
@@ -157,24 +157,30 @@ const ImprovedNavbar = () => {
                         <stop offset="100%" stopColor="#0284c7" />
                       </linearGradient>
                     </defs>
-                    {/* Geometric triangle design */}
+                    {/* Updated geometric design matching the provided logo */}
                     <path
-                      d="M20 5 L35 30 L5 30 Z M20 15 L25 25 L15 25 Z"
+                      d="M5 15 L20 5 L35 15 L30 25 L20 20 L10 25 Z"
                       fill="url(#logoGradient)"
                       stroke="none"
                     />
                     <path
-                      d="M20 8 L30 25 L10 25 Z"
-                      fill="none"
-                      stroke="url(#logoGradient)"
-                      strokeWidth="1.5"
+                      d="M15 30 L20 20 L25 30 L20 35 Z"
+                      fill="url(#logoGradient)"
+                      stroke="none"
+                      opacity="0.8"
+                    />
+                    <circle
+                      cx="20"
+                      cy="20"
+                      r="2"
+                      fill="white"
                     />
                   </svg>
                 </div>
                 
                 {/* Logo Text */}
                 <div className="flex flex-col">
-                  <span className={`text-2xl font-bold ${
+                  <span className={`text-xl sm:text-2xl font-bold ${
                     isScrolled 
                       ? 'text-cyan-600' 
                       : 'text-white'
