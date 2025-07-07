@@ -301,21 +301,45 @@ const ImprovedHeroSection = ({
   };
 
   return (
-    <section className={`relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br ${getBackgroundGradient()} pt-20 lg:pt-16`}>
-      {/* Animated Background Grid */}
+    <section className={`relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br ${getBackgroundGradient()} pt-24 lg:pt-20`}>
+      {/* Enhanced Animated Background Grid */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(14,165,233,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(14,165,233,0.1)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(14,165,233,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(14,165,233,0.08)_1px,transparent_1px)] bg-[size:40px_40px] sm:bg-[size:50px_50px]"></div>
         <motion.div
           animate={{ 
             backgroundPosition: ['0% 0%', '100% 100%'] 
           }}
           transition={{ 
-            duration: 20, 
+            duration: 25, 
             repeat: Infinity, 
             ease: "linear" 
           }}
           className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 bg-[length:200%_200%]"
         />
+        
+        {/* Additional floating particles for mobile */}
+        <div className="absolute inset-0 lg:hidden">
+          {[...Array(30)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-blue-400/40 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 0.8, 0],
+                scale: [0, 1, 0]
+              }}
+              transition={{
+                duration: Math.random() * 4 + 3,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Floating Cards */}
