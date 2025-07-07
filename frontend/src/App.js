@@ -68,7 +68,15 @@ import {
 import './App.css';
 
 // Import components
-import HeroSection from './components/HeroSection';
+import ImprovedHeroSection from './components/ImprovedHeroSection';
+import ImprovedNavbar from './components/ImprovedNavbar';
+import { 
+  DataFlowSection, 
+  LiveMetricsSection, 
+  ProductShowcaseSection, 
+  GlobalNetworkSection,
+  AnimatedSection 
+} from './components/AnimatedSections';
 
 // Import page components
 import SolutionsPage from './pages/SolutionsPage';
@@ -99,147 +107,22 @@ const scaleIn = {
   transition: { duration: 0.6, ease: "easeOut" }
 };
 
-const AnimatedSection = ({ children, className = "" }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: true });
-  
-  return (
-    <motion.div
-      ref={ref}
-      initial="initial"
-      animate={inView ? "animate" : "initial"}
-      variants={fadeInUp}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-const NavigationBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navItems = [
-    { name: 'Home', path: '/', icon: Home },
-    { name: 'Solutions', path: '/solutions', icon: Settings },
-    { name: 'Industries', path: '/industries', icon: Building },
-    { name: 'Technology', path: '/technology', icon: Cpu },
-    { name: 'About', path: '/about', icon: Info },
-    { name: 'Products', path: '/products', icon: Briefcase },
-    { name: 'Resources', path: '/resources', icon: BookOpen },
-    { name: 'Contact', path: '/contact', icon: MessageCircle }
-  ];
-
-  return (
-    <motion.nav 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg' 
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <motion.a 
-              href="/"
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center space-x-2"
-            >
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">B</span>
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                Bhrigu.tech
-              </span>
-            </motion.a>
-          </div>
-          
-          <div className="hidden lg:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item) => (
-                <motion.a
-                  key={item.name}
-                  href={item.path}
-                  whileHover={{ scale: 1.05 }}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1 ${
-                    isScrolled 
-                      ? 'text-gray-700 hover:text-blue-600' 
-                      : 'text-white hover:text-cyan-400'
-                  }`}
-                >
-                  <item.icon size={16} />
-                  {item.name}
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-          <div className="lg:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`transition-colors ${
-                isScrolled 
-                  ? 'text-gray-700 hover:text-blue-600' 
-                  : 'text-white hover:text-cyan-400'
-              }`}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="lg:hidden bg-white/95 backdrop-blur-md shadow-lg"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.path}
-                className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium flex items-center gap-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <item.icon size={16} />
-                {item.name}
-              </a>
-            ))}
-          </div>
-        </motion.div>
-      )}
-    </motion.nav>
-  );
-};
-
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-12">
+    <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">B</span>
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
+                <Sparkles className="w-6 h-6 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Bhrigu.tech
-              </span>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                  Bhrigu.tech
+                </span>
+                <span className="text-xs text-gray-400 -mt-1">Engineering Intelligence</span>
+              </div>
             </div>
             <p className="text-gray-400 mb-4">
               Engineering Intelligence. Empowering Compliance.
@@ -250,7 +133,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Solutions</h3>
+            <h3 className="text-lg font-semibold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">Solutions</h3>
             <ul className="space-y-2 text-gray-400">
               <li><a href="/solutions" className="hover:text-white transition-colors">BhriguOne Platform</a></li>
               <li><a href="/solutions" className="hover:text-white transition-colors">AI Analytics</a></li>
@@ -260,7 +143,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Industries</h3>
+            <h3 className="text-lg font-semibold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Industries</h3>
             <ul className="space-y-2 text-gray-400">
               <li><a href="/industries" className="hover:text-white transition-colors">Pharmaceuticals</a></li>
               <li><a href="/industries" className="hover:text-white transition-colors">Medical Devices</a></li>
@@ -270,7 +153,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
+            <h3 className="text-lg font-semibold mb-4 bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">Company</h3>
             <ul className="space-y-2 text-gray-400">
               <li><a href="/about" className="hover:text-white transition-colors">About Us</a></li>
               <li><a href="/resources" className="hover:text-white transition-colors">Resources</a></li>
@@ -288,28 +171,28 @@ const Footer = () => {
   );
 };
 
-// NEW SECTION 1: Technology Stack
+// Enhanced Technology Stack with Multi-colored Design
 const TechnologyStack = () => {
   const technologies = [
     { name: 'React.js', icon: Code, color: 'from-blue-500 to-cyan-500', category: 'Frontend' },
     { name: 'Node.js', icon: Server, color: 'from-green-500 to-emerald-500', category: 'Backend' },
     { name: 'Python', icon: Brain, color: 'from-yellow-500 to-orange-500', category: 'AI/ML' },
-    { name: 'MongoDB', icon: Database, color: 'from-green-600 to-green-700', category: 'Database' },
-    { name: 'Docker', icon: Cloud, color: 'from-blue-600 to-blue-700', category: 'DevOps' },
-    { name: 'TensorFlow', icon: Brain, color: 'from-orange-500 to-red-500', category: 'AI/ML' },
-    { name: 'AWS', icon: Cloud, color: 'from-yellow-400 to-orange-400', category: 'Cloud' },
+    { name: 'MongoDB', icon: Database, color: 'from-purple-600 to-purple-700', category: 'Database' },
+    { name: 'Docker', icon: Cloud, color: 'from-indigo-600 to-blue-700', category: 'DevOps' },
+    { name: 'TensorFlow', icon: Brain, color: 'from-red-500 to-pink-500', category: 'AI/ML' },
+    { name: 'AWS', icon: Cloud, color: 'from-amber-400 to-orange-400', category: 'Cloud' },
     { name: 'FastAPI', icon: Zap, color: 'from-teal-500 to-cyan-500', category: 'Backend' }
   ];
 
   const categories = ['Frontend', 'Backend', 'AI/ML', 'Database', 'DevOps', 'Cloud'];
 
   return (
-    <AnimatedSection className="py-24 bg-gradient-to-br from-slate-50 to-blue-50">
+    <AnimatedSection className="py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.h2 
             variants={fadeInUp}
-            className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent"
+            className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent"
           >
             Cutting-Edge Technologies Powering Next-Gen Solutions
           </motion.h2>
@@ -324,13 +207,20 @@ const TechnologyStack = () => {
         {/* Technology Categories */}
         <div className="mb-12">
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            {categories.map((category) => (
+            {categories.map((category, index) => (
               <motion.div
                 key={category}
                 whileHover={{ scale: 1.05 }}
-                className="bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-200 shadow-lg"
+                className={`bg-gradient-to-r ${
+                  index % 6 === 0 ? 'from-blue-500 to-cyan-500' :
+                  index % 6 === 1 ? 'from-green-500 to-emerald-500' :
+                  index % 6 === 2 ? 'from-purple-500 to-pink-500' :
+                  index % 6 === 3 ? 'from-orange-500 to-red-500' :
+                  index % 6 === 4 ? 'from-indigo-500 to-purple-500' :
+                  'from-teal-500 to-cyan-500'
+                } text-white px-6 py-3 rounded-full shadow-lg`}
               >
-                <span className="text-blue-700 font-medium">{category}</span>
+                <span className="font-medium">{category}</span>
               </motion.div>
             ))}
           </div>
@@ -361,7 +251,7 @@ const TechnologyStack = () => {
   );
 };
 
-// NEW SECTION 2: Industry Focus
+// Enhanced Industry Focus with Multi-colored Design
 const IndustryFocus = () => {
   const industries = [
     {
@@ -395,12 +285,12 @@ const IndustryFocus = () => {
   ];
 
   return (
-    <AnimatedSection className="py-24 bg-gradient-to-br from-blue-900 to-purple-900 text-white">
+    <AnimatedSection className="py-24 bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.h2 
             variants={fadeInUp}
-            className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent"
+            className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-green-400 to-emerald-400 bg-clip-text text-transparent"
           >
             Tailored for Every Regulated Industry
           </motion.h2>
@@ -448,116 +338,7 @@ const IndustryFocus = () => {
   );
 };
 
-// NEW SECTION 3: Development Process
-const DevelopmentProcess = () => {
-  const steps = [
-    {
-      step: '01',
-      title: 'Analysis & Research',
-      description: 'We start by analyzing your business requirements, regulatory landscape, and operational challenges to create a comprehensive project roadmap.',
-      icon: Target,
-      color: 'from-blue-500 to-cyan-500'
-    },
-    {
-      step: '02',
-      title: 'Architecture & Planning',
-      description: 'Our experts design a robust, scalable architecture that ensures compliance while maximizing operational efficiency.',
-      icon: Layers,
-      color: 'from-green-500 to-emerald-500'
-    },
-    {
-      step: '03',
-      title: 'Development & Testing',
-      description: 'Agile development methodology with continuous testing, validation, and quality assurance throughout the process.',
-      icon: Code,
-      color: 'from-purple-500 to-pink-500'
-    },
-    {
-      step: '04',
-      title: 'Compliance Validation',
-      description: 'Rigorous validation processes ensuring all regulatory requirements are met before deployment.',
-      icon: Shield,
-      color: 'from-orange-500 to-red-500'
-    },
-    {
-      step: '05',
-      title: 'Deployment & Training',
-      description: 'Seamless deployment with comprehensive training programs for your team to ensure smooth adoption.',
-      icon: Rocket,
-      color: 'from-teal-500 to-blue-500'
-    },
-    {
-      step: '06',
-      title: 'Support & Maintenance',
-      description: '24/7 support and continuous monitoring to ensure optimal performance and regulatory compliance.',
-      icon: Headphones,
-      color: 'from-indigo-500 to-purple-500'
-    }
-  ];
-
-  return (
-    <AnimatedSection className="py-24 bg-gradient-to-br from-slate-50 to-purple-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <motion.h2 
-            variants={fadeInUp}
-            className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
-          >
-            Our Proven Development Process
-          </motion.h2>
-          <motion.p 
-            variants={fadeInUp}
-            className="text-xl text-gray-700 max-w-3xl mx-auto"
-          >
-            A streamlined, compliance-focused approach that transforms your vision into a fully functional, regulatory-approved solution.
-          </motion.p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              variants={scaleIn}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
-            >
-              <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${step.color}`}></div>
-              
-              <div className="flex items-center mb-6">
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${step.color} flex items-center justify-center mr-4`}>
-                  <step.icon className="w-6 h-6 text-white" />
-                </div>
-                <div className={`text-3xl font-bold bg-gradient-to-r ${step.color} bg-clip-text text-transparent`}>
-                  {step.step}
-                </div>
-              </div>
-              
-              <h3 className="text-xl font-bold text-gray-900 mb-4">{step.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{step.description}</p>
-            </motion.div>
-          ))}
-        </div>
-        
-        <motion.div 
-          variants={fadeInUp}
-          className="text-center mt-16"
-        >
-          <motion.a
-            href="/contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-2"
-          >
-            Start Your Project Today
-            <ArrowRight size={20} />
-          </motion.a>
-        </motion.div>
-      </div>
-    </AnimatedSection>
-  );
-};
-
-// NEW SECTION 4: Success Metrics & ROI
+// Enhanced Success Metrics with Multi-colored Design
 const SuccessMetrics = () => {
   const metrics = [
     {
@@ -606,12 +387,12 @@ const SuccessMetrics = () => {
   ];
 
   return (
-    <AnimatedSection className="py-24 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
+    <AnimatedSection className="py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-blue-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.h2 
             variants={fadeInUp}
-            className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent"
+            className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent"
           >
             Measurable Results That Matter
           </motion.h2>
@@ -678,94 +459,64 @@ const SuccessMetrics = () => {
   );
 };
 
-// Homepage Component with 4 new sections
+// Homepage Component with Enhanced Multi-colored Design and New Animated Sections
 const HomePage = () => {
   return (
     <div>
       {/* Enhanced Hero Section */}
-      <HeroSection />
+      <ImprovedHeroSection 
+        title={
+          <>
+            Engineering{' '}
+            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
+              Intelligence
+            </span>
+            .
+            <br />
+            Empowering{' '}
+            <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
+              Compliance
+            </span>
+            .
+          </>
+        }
+        subtitle="Revolutionizing Regulated Industries with AI & Industry 4.0/5.0"
+        description="Transform your regulated manufacturing operations with our cutting-edge AI-powered platform, ensuring seamless compliance while maximizing efficiency across pharmaceuticals, medical devices, and biotechnology."
+        primaryButtonText="Explore BhriguOne Platform"
+        primaryButtonLink="/solutions"
+        secondaryButtonText="Schedule Live Demo"
+        secondaryButtonLink="/contact"
+        showMetrics={true}
+        heroType="default"
+      />
 
-      {/* NEW SECTION 1: Technology Stack */}
+      {/* NEW: Intelligent Data Flow Section */}
+      <DataFlowSection />
+
+      {/* Enhanced Technology Stack */}
       <TechnologyStack />
 
-      {/* NEW SECTION 2: Industry Focus */}
+      {/* NEW: Live Metrics Dashboard */}
+      <LiveMetricsSection />
+
+      {/* Enhanced Industry Focus */}
       <IndustryFocus />
 
-      {/* NEW SECTION 3: Development Process */}
-      <DevelopmentProcess />
+      {/* NEW: Interactive Product Showcase */}
+      <ProductShowcaseSection />
 
-      {/* NEW SECTION 4: Success Metrics & ROI */}
+      {/* Enhanced Success Metrics & ROI */}
       <SuccessMetrics />
 
-      {/* Enhanced Quick Overview */}
-      <AnimatedSection className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h2 
-            variants={fadeInUp}
-            className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-          >
-            Transforming Regulated Industries
-          </motion.h2>
-          
-          <motion.p 
-            variants={fadeInUp}
-            className="text-xl text-gray-700 mb-12 max-w-3xl mx-auto"
-          >
-            Building smart, future-ready platforms that enable safe, efficient, and 
-            fully compliant operations across regulated industries.
-          </motion.p>
-          
-          <motion.div 
-            variants={staggerChildren}
-            className="grid md:grid-cols-3 gap-8"
-          >
-            {[
-              {
-                title: "AI-Driven Analytics",
-                desc: "Predictive maintenance and quality control through machine learning",
-                icon: "🧠",
-                color: "from-blue-500 to-cyan-500",
-                link: "/technology"
-              },
-              {
-                title: "Industry 4.0/5.0 Ready",
-                desc: "Complete digital transformation for regulated manufacturing",
-                icon: "🏭",
-                color: "from-green-500 to-emerald-500",
-                link: "/industries"
-              },
-              {
-                title: "Compliance Automation",
-                desc: "Automated regulatory reporting and audit trail management",
-                icon: "⚖️",
-                color: "from-purple-500 to-pink-500",
-                link: "/solutions"
-              }
-            ].map((item, index) => (
-              <motion.a
-                key={index}
-                href={item.link}
-                variants={scaleIn}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 block"
-              >
-                <div className={`w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center text-2xl`}>
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
-              </motion.a>
-            ))}
-          </motion.div>
-        </div>
-      </AnimatedSection>
+      {/* NEW: Global Network Animation */}
+      <GlobalNetworkSection />
 
       {/* Enhanced Call to Action */}
-      <AnimatedSection className="py-24 bg-gradient-to-br from-blue-900 to-purple-900 text-white">
+      <AnimatedSection className="py-24 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h2 
             variants={fadeInUp}
-            className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent"
+            className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent"
           >
             Ready to Transform Your Operations?
           </motion.h2>
@@ -773,7 +524,7 @@ const HomePage = () => {
             variants={fadeInUp}
             className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto"
           >
-            Discover how BhriguOne can revolutionize your regulated manufacturing processes.
+            Discover how BhriguOne can revolutionize your regulated manufacturing processes with AI-powered intelligence and seamless compliance automation.
           </motion.p>
           
           <motion.div 
@@ -809,7 +560,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <NavigationBar />
+        <ImprovedNavbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/solutions" element={<SolutionsPage />} />
