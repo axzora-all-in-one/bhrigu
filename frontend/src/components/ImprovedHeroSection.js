@@ -563,15 +563,15 @@ const ImprovedHeroSection = ({
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - Mobile Optimized */}
       <motion.div
-        animate={{ y: [0, 10, 0] }}
+        animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white z-20"
+        className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 text-white z-20"
       >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-sm opacity-70">Discover More</span>
-          <ChevronDown size={24} className="text-blue-400" />
+        <div className="flex flex-col items-center gap-1 sm:gap-2">
+          <span className="text-xs sm:text-sm opacity-70 hidden sm:block">Discover More</span>
+          <ChevronDown size={20} className="sm:w-6 sm:h-6 text-blue-400" />
         </div>
       </motion.div>
     </section>
