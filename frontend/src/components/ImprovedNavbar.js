@@ -98,6 +98,12 @@ const ImprovedNavbar = () => {
       path: '/contact', 
       icon: MessageCircle,
       color: 'from-pink-500 to-rose-500'
+    },
+    { 
+      name: 'Careers', 
+      path: '/careers', 
+      icon: Briefcase,
+      color: 'from-emerald-500 to-green-500'
     }
   ];
 
