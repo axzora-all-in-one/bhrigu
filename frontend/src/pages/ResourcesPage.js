@@ -1,42 +1,38 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { 
   ArrowRight, 
-  BookOpen, 
+  Download, 
   FileText, 
   Video, 
-  Download, 
-  Calendar,
-  Users,
+  Calendar, 
+  Users, 
+  Clock, 
+  Star,
   Search,
   Filter,
-  Clock,
-  Star,
+  BookOpen,
+  Play,
   Eye,
-  MessageCircle,
-  Globe,
-  Bookmark,
   TrendingUp,
   Award,
-  Bell,
   Target,
-  Lightbulb,
-  Settings,
-  BarChart3,
-  Shield,
-  Code,
-  Database,
-  Network,
-  Zap,
   Brain,
-  Activity,
+  Shield,
+  BarChart3,
+  Settings,
   CheckCircle,
   ExternalLink,
-  Play,
-  Headphones,
-  Monitor,
-  Smartphone
+  Mail,
+  Share2,
+  Bookmark,
+  Heart,
+  MessageCircle,
+  Globe,
+  Lightbulb,
+  Zap
 } from 'lucide-react';
+import ImprovedHeroSection from '../components/ImprovedHeroSection';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -76,54 +72,132 @@ const AnimatedSection = ({ children, className = "" }) => {
 };
 
 const ResourcesPage = () => {
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const resourceCategories = [
+    { id: 'all', name: 'All Resources', icon: BookOpen, color: 'from-blue-500 to-cyan-500' },
+    { id: 'whitepapers', name: 'Whitepapers', icon: FileText, color: 'from-purple-500 to-pink-500' },
+    { id: 'case-studies', name: 'Case Studies', icon: Target, color: 'from-green-500 to-emerald-500' },
+    { id: 'webinars', name: 'Webinars', icon: Video, color: 'from-orange-500 to-red-500' },
+    { id: 'documentation', name: 'Documentation', icon: BookOpen, color: 'from-indigo-500 to-purple-500' },
+    { id: 'guides', name: 'Implementation Guides', icon: Settings, color: 'from-teal-500 to-cyan-500' }
+  ];
+
+  const resources = [
+    {
+      id: 1,
+      title: "AI-Powered Quality Control in Pharmaceutical Manufacturing",
+      type: "Whitepaper",
+      category: "whitepapers",
+      description: "Comprehensive guide on implementing AI-driven quality control systems to ensure compliance and reduce defects.",
+      downloadCount: "2.3k",
+      readTime: "15 min",
+      publishDate: "2024-12-15",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+      tags: ["AI", "Quality Control", "Pharmaceuticals"],
+      featured: true
+    },
+    {
+      id: 2,
+      title: "Digital Transformation Success: MedDevice Corp Case Study",
+      type: "Case Study",
+      category: "case-studies",
+      description: "How MedDevice Corp achieved 40% efficiency improvement with BhriguOne platform implementation.",
+      downloadCount: "1.8k",
+      readTime: "12 min",
+      publishDate: "2024-12-10",
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f",
+      tags: ["Digital Transformation", "Medical Devices", "ROI"],
+      featured: true
+    },
+    {
+      id: 3,
+      title: "Compliance Automation in Regulated Industries",
+      type: "Webinar",
+      category: "webinars",
+      description: "Live webinar discussing best practices for automating compliance processes in regulated manufacturing.",
+      downloadCount: "3.1k",
+      readTime: "45 min",
+      publishDate: "2024-12-05",
+      image: "https://images.unsplash.com/photo-1591115765373-5207764f72e7",
+      tags: ["Compliance", "Automation", "Webinar"],
+      featured: false
+    },
+    {
+      id: 4,
+      title: "BhriguOne Platform API Documentation",
+      type: "Documentation",
+      category: "documentation",
+      description: "Complete API reference and integration guide for developers working with BhriguOne platform.",
+      downloadCount: "5.2k",
+      readTime: "30 min",
+      publishDate: "2024-11-28",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+      tags: ["API", "Documentation", "Integration"],
+      featured: false
+    },
+    {
+      id: 5,
+      title: "IoT Implementation Guide for Manufacturing",
+      type: "Implementation Guide",
+      category: "guides",
+      description: "Step-by-step guide for implementing IoT sensors and connectivity in manufacturing environments.",
+      downloadCount: "1.9k",
+      readTime: "25 min",
+      publishDate: "2024-11-20",
+      image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a",
+      tags: ["IoT", "Manufacturing", "Implementation"],
+      featured: false
+    },
+    {
+      id: 6,
+      title: "Food Safety Revolution: Smart HACCP Implementation",
+      type: "Case Study",
+      category: "case-studies",
+      description: "How Global Foods Inc. revolutionized their HACCP compliance using intelligent monitoring systems.",
+      downloadCount: "1.4k",
+      readTime: "18 min",
+      publishDate: "2024-11-15",
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136",
+      tags: ["Food Safety", "HACCP", "Smart Monitoring"],
+      featured: false
+    }
+  ];
+
+  const filteredResources = resources.filter(resource => {
+    const matchesFilter = activeFilter === 'all' || resource.category === activeFilter;
+    const matchesSearch = resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         resource.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    return matchesFilter && matchesSearch;
+  });
+
+  const featuredResources = resources.filter(resource => resource.featured);
+
   return (
     <div className="pt-16">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `linear-gradient(135deg, rgba(0, 102, 255, 0.9) 0%, rgba(139, 92, 246, 0.8) 100%), url('https://images.unsplash.com/photo-1641927420960-8059f26993d9')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed'
-          }}
-        />
-        
-        <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="max-w-5xl mx-auto"
-          >
-            <motion.h1 
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-            >
-              Knowledge &
-              <br />
-              <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
-                Innovation Hub
-              </span>
-            </motion.h1>
-            
-            <motion.p 
-              className="text-xl sm:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              Comprehensive resources, insights, and documentation to help you succeed 
-              with Industry 4.0/5.0 transformation in regulated industries.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
+      {/* Enhanced Hero Section */}
+      <ImprovedHeroSection 
+        title={
+          <>
+            Knowledge
+            <br />
+            <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
+              Hub
+            </span>
+          </>
+        }
+        subtitle="Expert Insights & Resources for Regulated Manufacturing"
+        description="Access comprehensive resources including whitepapers, case studies, webinars, and implementation guides to accelerate your digital transformation journey in regulated industries."
+        primaryButtonText="Browse Resources"
+        primaryButtonLink="#resources-library"
+        secondaryButtonText="Subscribe to Updates"
+        secondaryButtonLink="#newsletter"
+        heroType="resources"
+      />
 
-      {/* Resource Categories */}
+      {/* Featured Resources */}
       <AnimatedSection className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -131,511 +205,328 @@ const ResourcesPage = () => {
               variants={fadeInUp}
               className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
             >
-              Resource Categories
+              Featured Resources
             </motion.h2>
             <motion.p 
               variants={fadeInUp}
               className="text-xl text-gray-700 max-w-3xl mx-auto"
             >
-              Explore our comprehensive library of resources designed to accelerate 
-              your digital transformation journey.
+              Trending insights and latest publications from our experts in regulated manufacturing and compliance.
             </motion.p>
           </div>
-          
-          <motion.div 
-            variants={staggerChildren}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {[
-              { 
-                title: "Blog & Insights", 
-                icon: BookOpen, 
-                desc: "Industry trends and best practices",
-                count: "50+ articles",
-                color: "from-blue-500 to-cyan-500",
-                link: "#blog"
-              },
-              { 
-                title: "White Papers", 
-                icon: FileText, 
-                desc: "In-depth technical documentation",
-                count: "15+ papers",
-                color: "from-green-500 to-emerald-500",
-                link: "#whitepapers"
-              },
-              { 
-                title: "Case Studies", 
-                icon: Target, 
-                desc: "Real-world implementation stories",
-                count: "25+ studies",
-                color: "from-purple-500 to-pink-500",
-                link: "#casestudies"
-              },
-              { 
-                title: "Webinars & Events", 
-                icon: Video, 
-                desc: "Live and recorded presentations",
-                count: "30+ sessions",
-                color: "from-orange-500 to-red-500",
-                link: "#webinars"
-              },
-              { 
-                title: "Documentation", 
-                icon: Code, 
-                desc: "Technical guides and API docs",
-                count: "100+ guides",
-                color: "from-indigo-500 to-blue-500",
-                link: "#documentation"
-              },
-              { 
-                title: "Regulatory Updates", 
-                icon: Bell, 
-                desc: "Latest compliance information",
-                count: "Weekly updates",
-                color: "from-teal-500 to-green-500",
-                link: "#regulatory"
-              }
-            ].map((category, index) => (
-              <motion.a
-                key={index}
-                href={category.link}
-                variants={scaleIn}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 block"
-              >
-                <div className={`w-16 h-16 mb-6 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center`}>
-                  <category.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{category.title}</h3>
-                <p className="text-gray-600 mb-3">{category.desc}</p>
-                <div className="text-sm text-blue-600 font-medium">{category.count}</div>
-                <div className="mt-4 flex items-center text-blue-600 font-medium">
-                  Explore <ArrowRight className="w-4 h-4 ml-2" />
-                </div>
-              </motion.a>
-            ))}
-          </motion.div>
-        </div>
-      </AnimatedSection>
 
-      {/* Blog & Insights */}
-      <AnimatedSection id="blog" className="py-24 bg-gradient-to-br from-blue-50 to-cyan-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2 
-              variants={fadeInUp}
-              className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent"
-            >
-              Blog & Insights
-            </motion.h2>
-            <motion.p 
-              variants={fadeInUp}
-              className="text-xl text-gray-700 max-w-3xl mx-auto"
-            >
-              Stay ahead with the latest trends in Industry 4.0/5.0, compliance best practices, 
-              and technology innovations.
-            </motion.p>
-          </div>
-          
-          <motion.div 
-            variants={staggerChildren}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {[
-              {
-                title: "The Future of Pharmaceutical Manufacturing",
-                excerpt: "Exploring how AI and IoT are revolutionizing drug production processes...",
-                category: "Industry 4.0",
-                readTime: "8 min read",
-                date: "Dec 15, 2024",
-                image: "https://images.pexels.com/photos/6075001/pexels-photo-6075001.jpeg"
-              },
-              {
-                title: "FDA's Digital Transformation Guidelines",
-                excerpt: "Understanding the latest regulatory requirements for digital systems...",
-                category: "Compliance",
-                readTime: "12 min read",
-                date: "Dec 10, 2024",
-                image: "https://images.pexels.com/photos/8532850/pexels-photo-8532850.jpeg"
-              },
-              {
-                title: "IoT Implementation in Food Safety",
-                excerpt: "How smart sensors are enhancing HACCP compliance and food quality...",
-                category: "Technology",
-                readTime: "6 min read",
-                date: "Dec 5, 2024",
-                image: "https://images.pexels.com/photos/3889053/pexels-photo-3889053.jpeg"
-              }
-            ].map((article, index) => (
-              <motion.div
-                key={index}
-                variants={scaleIn}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {article.category}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{article.title}</h3>
-                  <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                  <div className="flex items-center justify-between text-sm text-gray-500">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {article.readTime}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {article.date}
-                      </div>
-                    </div>
-                    <ExternalLink className="w-4 h-4" />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </AnimatedSection>
-
-      {/* White Papers */}
-      <AnimatedSection id="whitepapers" className="py-24 bg-gradient-to-br from-green-50 to-emerald-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2 
-              variants={fadeInUp}
-              className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent"
-            >
-              White Papers
-            </motion.h2>
-            <motion.p 
-              variants={fadeInUp}
-              className="text-xl text-gray-700 max-w-3xl mx-auto"
-            >
-              Comprehensive technical documentation and research papers on digital 
-              transformation in regulated industries.
-            </motion.p>
-          </div>
-          
           <motion.div 
             variants={staggerChildren}
             className="grid md:grid-cols-2 gap-8"
           >
-            {[
-              {
-                title: "Digital Transformation in Regulated Industries",
-                description: "A comprehensive guide to implementing Industry 4.0 technologies while maintaining regulatory compliance across pharmaceutical, medical device, and food manufacturing sectors.",
-                pages: "45 pages",
-                downloads: "2.3K downloads",
-                type: "Technical Guide",
-                featured: true
-              },
-              {
-                title: "AI in Pharmaceutical Manufacturing",
-                description: "Exploring the applications of artificial intelligence in drug discovery, manufacturing optimization, and quality control processes.",
-                pages: "32 pages",
-                downloads: "1.8K downloads",
-                type: "Research Paper",
-                featured: false
-              },
-              {
-                title: "IoT Implementation in Food Safety",
-                description: "Best practices for deploying IoT sensors and monitoring systems to enhance HACCP compliance and ensure food safety standards.",
-                pages: "28 pages",
-                downloads: "1.5K downloads",
-                type: "Implementation Guide",
-                featured: false
-              }
-            ].map((paper, index) => (
+            {featuredResources.map((resource, index) => (
               <motion.div
-                key={index}
+                key={resource.id}
                 variants={scaleIn}
-                whileHover={{ scale: 1.02 }}
-                className={`bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 ${
-                  paper.featured ? 'border-2 border-green-500' : ''
-                }`}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
               >
-                {paper.featured && (
-                  <div className="flex items-center gap-2 mb-4">
-                    <Star className="w-5 h-5 text-yellow-500" />
-                    <span className="text-sm font-medium text-green-600">Featured Paper</span>
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={resource.image}
+                    alt={resource.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                      Featured
+                    </span>
                   </div>
-                )}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{paper.title}</h3>
-                    <p className="text-gray-600 mb-4">{paper.description}</p>
-                  </div>
-                  <FileText className="w-12 h-12 text-green-600 ml-4" />
-                </div>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-4 text-sm text-gray-500">
-                    <span>{paper.pages}</span>
-                    <span>•</span>
-                    <span>{paper.downloads}</span>
-                    <span>•</span>
-                    <span>{paper.type}</span>
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
+                      {resource.type}
+                    </span>
                   </div>
                 </div>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <Download className="w-5 h-5" />
-                  Download PDF
-                </motion.button>
+                
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{resource.title}</h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{resource.description}</p>
+                  
+                  <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <Download size={16} />
+                      {resource.downloadCount}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock size={16} />
+                      {resource.readTime}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar size={16} />
+                      {new Date(resource.publishDate).toLocaleDateString()}
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {resource.tags.map((tag, idx) => (
+                      <span key={idx} className="bg-blue-100 text-blue-700 px-2 py-1 rounded-md text-xs">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 hover:shadow-lg transition-all duration-300"
+                  >
+                    <Download size={16} />
+                    Download Resource
+                  </motion.button>
+                </div>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </AnimatedSection>
 
-      {/* Webinars & Events */}
-      <AnimatedSection id="webinars" className="py-24 bg-gradient-to-br from-purple-50 to-pink-50">
+      {/* Resources Library */}
+      <AnimatedSection id="resources-library" className="py-24 bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2 
               variants={fadeInUp}
-              className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+              className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
             >
-              Webinars & Events
+              Resources Library
             </motion.h2>
             <motion.p 
               variants={fadeInUp}
               className="text-xl text-gray-700 max-w-3xl mx-auto"
             >
-              Join our industry experts for live discussions, product demonstrations, 
-              and thought leadership sessions.
+              Explore our comprehensive collection of resources organized by category and topic.
             </motion.p>
           </div>
-          
+
+          {/* Search and Filters */}
+          <motion.div 
+            variants={fadeInUp}
+            className="mb-12"
+          >
+            <div className="flex flex-col md:flex-row gap-4 mb-8">
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <input
+                  type="text"
+                  placeholder="Search resources..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <Filter className="text-gray-400" size={20} />
+                <span className="text-gray-600 text-sm">Filter by category:</span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {resourceCategories.map((category) => (
+                <motion.button
+                  key={category.id}
+                  onClick={() => setActiveFilter(category.id)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
+                    activeFilter === category.id
+                      ? `bg-gradient-to-r ${category.color} text-white shadow-lg`
+                      : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                  }`}
+                >
+                  <category.icon size={16} />
+                  {category.name}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Resources Grid */}
           <motion.div 
             variants={staggerChildren}
-            className="grid lg:grid-cols-2 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {/* Upcoming Events */}
-            <motion.div variants={fadeInUp}>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                <Calendar className="w-6 h-6 text-purple-600" />
-                Upcoming Events
-              </h3>
-              <div className="space-y-4">
-                {[
-                  {
-                    title: "Industry 4.0 in Pharmaceutical Manufacturing",
-                    date: "Jan 15, 2025",
-                    time: "2:00 PM EST",
-                    type: "Live Webinar",
-                    attendees: "450+ registered"
-                  },
-                  {
-                    title: "BhriguOne Platform Deep Dive",
-                    date: "Jan 25, 2025",
-                    time: "11:00 AM EST",
-                    type: "Product Demo",
-                    attendees: "320+ registered"
-                  }
-                ].map((event, index) => (
-                  <motion.div
-                    key={index}
-                    variants={scaleIn}
-                    className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-gray-900 mb-2">{event.title}</h4>
-                        <div className="flex items-center gap-4 text-sm text-gray-600">
-                          <span>{event.date}</span>
-                          <span>{event.time}</span>
-                        </div>
-                      </div>
-                      <span className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium">
-                        {event.type}
+            {filteredResources.map((resource, index) => (
+              <motion.div
+                key={resource.id}
+                variants={scaleIn}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+              >
+                <div className="relative h-40 overflow-hidden">
+                  <img 
+                    src={resource.image}
+                    alt={resource.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+                  <div className="absolute top-3 right-3">
+                    <span className="bg-white/20 backdrop-blur-sm text-white px-2 py-1 rounded-lg text-xs">
+                      {resource.type}
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{resource.title}</h3>
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">{resource.description}</p>
+                  
+                  <div className="flex items-center gap-3 mb-4 text-xs text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <Download size={14} />
+                      {resource.downloadCount}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock size={14} />
+                      {resource.readTime}
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {resource.tags.slice(0, 2).map((tag, idx) => (
+                      <span key={idx} className="bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs">
+                        {tag}
                       </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">{event.attendees}</span>
-                      <button className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors">
-                        Register
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Past Recordings */}
-            <motion.div variants={fadeInUp}>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                <Video className="w-6 h-6 text-purple-600" />
-                Past Recordings
-              </h3>
-              <div className="space-y-4">
-                {[
-                  {
-                    title: "FDA Compliance in Digital Manufacturing",
-                    duration: "45 minutes",
-                    views: "1.2K views",
-                    rating: "4.8/5"
-                  },
-                  {
-                    title: "IoT Implementation Best Practices",
-                    duration: "38 minutes",
-                    views: "980 views",
-                    rating: "4.9/5"
-                  },
-                  {
-                    title: "Quality Management in Industry 4.0",
-                    duration: "52 minutes",
-                    views: "1.5K views",
-                    rating: "4.7/5"
-                  }
-                ].map((recording, index) => (
-                  <motion.div
-                    key={index}
-                    variants={scaleIn}
-                    className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-gray-900 mb-2">{recording.title}</h4>
-                        <div className="flex items-center gap-4 text-sm text-gray-600">
-                          <span>{recording.duration}</span>
-                          <span>{recording.views}</span>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 text-yellow-500" />
-                            <span>{recording.rating}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <Play className="w-8 h-8 text-purple-600" />
-                    </div>
-                    <button className="w-full bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
-                      Watch Recording
-                    </button>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+                    ))}
+                    {resource.tags.length > 2 && (
+                      <span className="text-gray-400 text-xs">+{resource.tags.length - 2} more</span>
+                    )}
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="flex-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-1"
+                    >
+                      <Download size={14} />
+                      Download
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <Bookmark size={14} className="text-gray-600" />
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
+
+          {filteredResources.length === 0 && (
+            <div className="text-center py-12">
+              <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No resources found</h3>
+              <p className="text-gray-600">Try adjusting your search or filter criteria.</p>
+            </div>
+          )}
         </div>
       </AnimatedSection>
 
-      {/* Documentation */}
-      <AnimatedSection id="documentation" className="py-24 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
+      {/* Newsletter Subscription */}
+      <AnimatedSection id="newsletter" className="py-24 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="max-w-4xl mx-auto text-center">
             <motion.h2 
               variants={fadeInUp}
               className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent"
             >
-              Documentation
+              Stay Updated
             </motion.h2>
             <motion.p 
               variants={fadeInUp}
-              className="text-xl text-gray-300 max-w-3xl mx-auto"
+              className="text-xl text-gray-300 mb-8"
             >
-              Comprehensive technical guides, API documentation, and implementation 
-              resources for developers and system administrators.
+              Subscribe to our newsletter and get the latest insights, resources, and updates delivered to your inbox.
             </motion.p>
-          </div>
-          
-          <motion.div 
-            variants={staggerChildren}
-            className="grid md:grid-cols-3 gap-8"
-          >
-            {[
-              {
-                title: "API Documentation",
-                icon: Code,
-                desc: "Complete API reference with interactive examples",
-                items: ["REST API Reference", "GraphQL Endpoints", "Authentication", "Rate Limiting"]
-              },
-              {
-                title: "Implementation Guides",
-                icon: Settings,
-                desc: "Step-by-step implementation and configuration guides",
-                items: ["Quick Start Guide", "Advanced Configuration", "Best Practices", "Troubleshooting"]
-              },
-              {
-                title: "Integration Tutorials",
-                icon: Network,
-                desc: "Detailed tutorials for third-party integrations",
-                items: ["ERP Integration", "LIMS Connectivity", "IoT Device Setup", "Cloud Deployment"]
-              }
-            ].map((doc, index) => (
-              <motion.div
-                key={index}
-                variants={scaleIn}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-300"
+            
+            <motion.div 
+              variants={fadeInUp}
+              className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto mb-8"
+            >
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 px-6 py-4 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+              />
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(0, 255, 127, 0.3)" }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-green-500 to-cyan-500 text-white px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 hover:shadow-xl transition-all duration-300"
               >
-                <doc.icon className="w-12 h-12 text-cyan-400 mb-6" />
-                <h3 className="text-2xl font-bold text-white mb-4">{doc.title}</h3>
-                <p className="text-gray-300 mb-6">{doc.desc}</p>
-                <ul className="space-y-2">
-                  {doc.items.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-4 h-4 text-green-400" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </motion.div>
+                <Mail size={20} />
+                Subscribe
+              </motion.button>
+            </motion.div>
+            
+            <motion.div 
+              variants={fadeInUp}
+              className="grid md:grid-cols-3 gap-8 text-center"
+            >
+              {[
+                { icon: FileText, title: "Weekly Insights", desc: "Latest industry trends and best practices" },
+                { icon: Video, title: "Exclusive Webinars", desc: "Early access to expert sessions" },
+                { icon: Lightbulb, title: "Product Updates", desc: "New features and improvements" }
+              ].map((benefit, index) => (
+                <div key={index} className="flex flex-col items-center">
+                  <div className="w-12 h-12 mb-3 rounded-xl bg-gradient-to-r from-green-500 to-cyan-500 flex items-center justify-center">
+                    <benefit.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-semibold mb-2">{benefit.title}</h4>
+                  <p className="text-gray-400 text-sm">{benefit.desc}</p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </AnimatedSection>
 
-      {/* Newsletter Signup */}
+      {/* Call to Action */}
       <AnimatedSection className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h2 
             variants={fadeInUp}
             className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
           >
-            Stay Updated
+            Need Personalized Guidance?
           </motion.h2>
           <motion.p 
             variants={fadeInUp}
             className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto"
           >
-            Subscribe to our newsletter for the latest insights, product updates, 
-            and regulatory news in regulated manufacturing.
+            Our experts are ready to help you navigate your digital transformation journey with personalized consultations and custom resources.
           </motion.p>
           
           <motion.div 
             variants={fadeInUp}
-            className="max-w-md mx-auto"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <div className="flex gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
-              >
-                Subscribe
-              </motion.button>
-            </div>
-            <p className="text-sm text-gray-500 mt-3">
-              No spam. Unsubscribe anytime. Read our privacy policy.
-            </p>
+            <motion.a
+              href="/contact"
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)" }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+            >
+              Schedule Consultation
+              <ArrowRight size={20} />
+            </motion.a>
+            
+            <motion.a
+              href="/solutions"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition-all duration-300"
+            >
+              Explore Solutions
+            </motion.a>
           </motion.div>
         </div>
       </AnimatedSection>
