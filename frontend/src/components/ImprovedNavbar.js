@@ -145,15 +145,50 @@ const ImprovedNavbar = () => {
               whileHover={{ scale: 1.05 }}
               className="flex items-center space-x-3"
             >
-              {/* Logo placeholder - will be replaced with actual logo */}
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
-                  Bhrigu.tech
-                </span>
-                <span className="text-xs text-gray-500 -mt-1">Engineering Intelligence</span>
+              {/* Bhrigu Logo */}
+              <div className="flex items-center gap-3">
+                {/* Logo Icon - recreating the geometric design */}
+                <div className="w-10 h-10 relative">
+                  <svg viewBox="0 0 40 40" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#0891b2" />
+                        <stop offset="50%" stopColor="#06b6d4" />
+                        <stop offset="100%" stopColor="#0284c7" />
+                      </linearGradient>
+                    </defs>
+                    {/* Geometric triangle design */}
+                    <path
+                      d="M20 5 L35 30 L5 30 Z M20 15 L25 25 L15 25 Z"
+                      fill="url(#logoGradient)"
+                      stroke="none"
+                    />
+                    <path
+                      d="M20 8 L30 25 L10 25 Z"
+                      fill="none"
+                      stroke="url(#logoGradient)"
+                      strokeWidth="1.5"
+                    />
+                  </svg>
+                </div>
+                
+                {/* Logo Text */}
+                <div className="flex flex-col">
+                  <span className={`text-2xl font-bold ${
+                    isScrolled 
+                      ? 'text-cyan-600' 
+                      : 'text-white'
+                  }`}>
+                    Bhrigu
+                  </span>
+                  <span className={`text-xs font-medium -mt-1 ${
+                    isScrolled 
+                      ? 'text-cyan-500' 
+                      : 'text-cyan-300'
+                  }`}>
+                    FUTURE ENGINEERED
+                  </span>
+                </div>
               </div>
             </motion.a>
           </div>
