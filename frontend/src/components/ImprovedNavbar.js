@@ -1,0 +1,322 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Menu, 
+  X, 
+  Home, 
+  Settings, 
+  Building, 
+  Cpu, 
+  Info, 
+  Briefcase, 
+  BookOpen, 
+  MessageCircle,
+  ChevronDown,
+  Sparkles,
+  Zap,
+  Globe,
+  Phone,
+  Mail
+} from 'lucide-react';
+
+const ImprovedNavbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems = [
+    { 
+      name: 'Home', 
+      path: '/', 
+      icon: Home,
+      color: 'from-blue-500 to-cyan-500'
+    },
+    { 
+      name: 'Solutions', 
+      path: '/solutions', 
+      icon: Settings,
+      color: 'from-purple-500 to-pink-500',
+      dropdown: [
+        { name: 'BhriguOne Platform', path: '/solutions#platform' },
+        { name: 'AI Analytics', path: '/solutions#analytics' },
+        { name: 'IoT Integration', path: '/solutions#iot' },
+        { name: 'Compliance Automation', path: '/solutions#compliance' }
+      ]
+    },
+    { 
+      name: 'Industries', 
+      path: '/industries', 
+      icon: Building,
+      color: 'from-green-500 to-emerald-500',
+      dropdown: [
+        { name: 'Pharmaceuticals', path: '/industries#pharma' },
+        { name: 'Medical Devices', path: '/industries#medical' },
+        { name: 'Food & Beverage', path: '/industries#food' },
+        { name: 'Biotechnology', path: '/industries#biotech' }
+      ]
+    },
+    { 
+      name: 'Technology', 
+      path: '/technology', 
+      icon: Cpu,
+      color: 'from-orange-500 to-red-500'
+    },
+    { 
+      name: 'About', 
+      path: '/about', 
+      icon: Info,
+      color: 'from-teal-500 to-cyan-500'
+    },
+    { 
+      name: 'Products', 
+      path: '/products', 
+      icon: Briefcase,
+      color: 'from-indigo-500 to-purple-500'
+    },
+    { 
+      name: 'Resources', 
+      path: '/resources', 
+      icon: BookOpen,
+      color: 'from-amber-500 to-orange-500',
+      dropdown: [
+        { name: 'Documentation', path: '/resources#docs' },
+        { name: 'Case Studies', path: '/resources#cases' },
+        { name: 'Whitepapers', path: '/resources#papers' },
+        { name: 'Webinars', path: '/resources#webinars' }
+      ]
+    },
+    { 
+      name: 'Contact', 
+      path: '/contact', 
+      icon: MessageCircle,
+      color: 'from-pink-500 to-rose-500'
+    }
+  ];
+
+  const dropdownVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: -10,
+      scale: 0.95
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.2,
+        ease: "easeOut"
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: -10,
+      scale: 0.95,
+      transition: {
+        duration: 0.15
+      }
+    }
+  };
+
+  return (
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200/50' 
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex items-center">
+            <motion.a 
+              href="/"
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-3"
+            >
+              {/* Logo placeholder - will be replaced with actual logo */}
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
+                  Bhrigu.tech
+                </span>
+                <span className="text-xs text-gray-500 -mt-1">Engineering Intelligence</span>
+              </div>
+            </motion.a>
+          </div>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden lg:block">
+            <div className="ml-10 flex items-center space-x-1">
+              {navItems.map((item) => (
+                <div 
+                  key={item.name}
+                  className="relative"
+                  onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <motion.a
+                    href={item.path}
+                    whileHover={{ scale: 1.05 }}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2 relative overflow-hidden group ${
+                      isScrolled 
+                        ? 'text-gray-700 hover:text-white' 
+                        : 'text-white hover:text-white'
+                    }`}
+                  >
+                    {/* Animated background */}
+                    <motion.div 
+                      className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl`}
+                      whileHover={{ scale: 1.1 }}
+                    />
+                    
+                    {/* Icon and text */}
+                    <div className="relative z-10 flex items-center gap-2">
+                      <item.icon size={16} />
+                      {item.name}
+                      {item.dropdown && <ChevronDown size={14} />}
+                    </div>
+                  </motion.a>
+
+                  {/* Dropdown Menu */}
+                  <AnimatePresence>
+                    {item.dropdown && activeDropdown === item.name && (
+                      <motion.div
+                        variants={dropdownVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-gray-200/50 py-2"
+                      >
+                        {item.dropdown.map((dropItem, index) => (
+                          <motion.a
+                            key={dropItem.name}
+                            href={dropItem.path}
+                            whileHover={{ x: 5 }}
+                            className="block px-4 py-3 text-sm text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-200 mx-2 rounded-xl"
+                          >
+                            {dropItem.name}
+                          </motion.a>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden lg:block">
+            <motion.a
+              href="/contact"
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)" }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-xl font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+            >
+              <Zap size={16} />
+              Get Started
+            </motion.a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`transition-colors p-2 rounded-lg ${
+                isScrolled 
+                  ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
+                  : 'text-white hover:text-cyan-400 hover:bg-white/10'
+              }`}
+            >
+              <motion.div
+                animate={{ rotate: isMenuOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </motion.div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-white/95 backdrop-blur-md shadow-lg border-t border-gray-200/50"
+          >
+            <div className="px-4 pt-4 pb-6 space-y-2">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <a
+                    href={item.path}
+                    className="flex items-center gap-3 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${item.color} flex items-center justify-center`}>
+                      <item.icon size={16} className="text-white" />
+                    </div>
+                    {item.name}
+                  </a>
+                  
+                  {/* Mobile Dropdown */}
+                  {item.dropdown && (
+                    <div className="ml-12 mt-2 space-y-1">
+                      {item.dropdown.map((dropItem) => (
+                        <a
+                          key={dropItem.name}
+                          href={dropItem.path}
+                          className="block text-gray-600 hover:text-blue-600 px-4 py-2 text-sm"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {dropItem.name}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+              
+              {/* Mobile CTA */}
+              <motion.a
+                href="/contact"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navItems.length * 0.1 }}
+                className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-xl font-semibold mt-4 shadow-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Zap size={16} />
+                Get Started
+              </motion.a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
+  );
+};
+
+export default ImprovedNavbar;
