@@ -284,22 +284,6 @@ const ImprovedNavbar = () => {
                     </div>
                     {item.name}
                   </a>
-                  
-                  {/* Mobile Dropdown */}
-                  {item.dropdown && (
-                    <div className="ml-12 mt-2 space-y-1">
-                      {item.dropdown.map((dropItem) => (
-                        <a
-                          key={dropItem.name}
-                          href={dropItem.path}
-                          className="block text-gray-600 hover:text-blue-600 px-4 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {dropItem.name}
-                        </a>
-                      ))}
-                    </div>
-                  )}
                 </motion.div>
               ))}
               
