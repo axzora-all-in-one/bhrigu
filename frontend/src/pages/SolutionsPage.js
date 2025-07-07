@@ -67,50 +67,26 @@ const AnimatedSection = ({ children, className = "" }) => {
 const SolutionsPage = () => {
   return (
     <div className="pt-16">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `linear-gradient(135deg, rgba(0, 102, 255, 0.9) 0%, rgba(139, 92, 246, 0.8) 100%), url('https://images.pexels.com/photos/16053029/pexels-photo-16053029.jpeg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed'
-          }}
-        />
-        
-        <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="max-w-5xl mx-auto"
-          >
-            <motion.h1 
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-            >
-              BhriguOne Platform
-              <br />
-              <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
-                Deep Dive
-              </span>
-            </motion.h1>
-            
-            <motion.p 
-              className="text-xl sm:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              Comprehensive solutions for regulated industries combining AI, IoT, 
-              and compliance automation in one unified platform.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
+      {/* Modern Hero Section */}
+      <ModernHeroSection
+        title={
+          <>
+            BhriguOne Platform
+            <br />
+            <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
+              Deep Dive
+            </span>
+          </>
+        }
+        subtitle="Comprehensive AI-Powered Solutions"
+        description="Unified platform combining AI, IoT, and compliance automation specifically designed for regulated industries including pharmaceuticals, medical devices, food & beverage, and biotechnology."
+        primaryButtonText="Explore Platform"
+        primaryButtonLink="/contact"
+        secondaryButtonText="View Demo"
+        secondaryButtonLink="#platform-overview"
+        centerIcon={Settings}
+        backgroundGradient="from-blue-900 via-purple-900 to-indigo-900"
+      />
 
       {/* Platform Overview */}
       <AnimatedSection className="py-24 bg-gradient-to-br from-gray-50 to-white">
