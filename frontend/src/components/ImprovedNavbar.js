@@ -301,9 +301,9 @@ const ImprovedNavbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white/95 backdrop-blur-md shadow-lg border-t border-gray-200/50"
+            className="lg:hidden bg-white/95 backdrop-blur-md shadow-lg border-t border-gray-200/50 max-h-screen overflow-y-auto"
           >
-            <div className="px-4 pt-4 pb-6 space-y-2">
+            <div className="px-4 pt-4 pb-6 space-y-2 max-h-96 overflow-y-auto">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.name}
@@ -329,7 +329,7 @@ const ImprovedNavbar = () => {
                         <a
                           key={dropItem.name}
                           href={dropItem.path}
-                          className="block text-gray-600 hover:text-blue-600 px-4 py-2 text-sm"
+                          className="block text-gray-600 hover:text-blue-600 px-4 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors duration-200"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {dropItem.name}
@@ -346,7 +346,7 @@ const ImprovedNavbar = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.1 }}
-                className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-xl font-semibold mt-4 shadow-lg"
+                className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-xl font-semibold mt-4 shadow-lg hover:shadow-xl transition-all duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <Zap size={16} />
