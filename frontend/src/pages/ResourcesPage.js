@@ -177,7 +177,7 @@ const ResourcesPage = () => {
 
   return (
     <div className="pt-16">
-      {/* Enhanced Hero Section */}
+      {/* Enhanced Hero Section with 3D Elements */}
       <ImprovedHeroSection 
         title={
           <>
@@ -188,7 +188,7 @@ const ResourcesPage = () => {
             </span>
           </>
         }
-        subtitle="Expert Insights & Resources for Regulated Manufacturing"
+        subtitle="Expert Insights & Resources for Manufacturing Intelligence"
         description="Access comprehensive resources including whitepapers, case studies, webinars, and implementation guides to accelerate your digital transformation journey in regulated industries."
         primaryButtonText="Browse Resources"
         primaryButtonLink="#resources-library"
