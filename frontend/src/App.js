@@ -575,14 +575,46 @@ function App() {
         <ImprovedNavbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/solutions" element={<SolutionsPage />} />
-          <Route path="/industries" element={<IndustriesPage />} />
-          <Route path="/technology" element={<TechnologyPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/resources" element={<ResourcesPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/careers" element={<CareerPage />} />
+          <Route path="/solutions" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <SolutionsPage />
+            </Suspense>
+          } />
+          <Route path="/industries" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <IndustriesPage />
+            </Suspense>
+          } />
+          <Route path="/technology" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <TechnologyPage />
+            </Suspense>
+          } />
+          <Route path="/about" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <AboutPage />
+            </Suspense>
+          } />
+          <Route path="/products" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <ProductsPage />
+            </Suspense>
+          } />
+          <Route path="/resources" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <ResourcesPage />
+            </Suspense>
+          } />
+          <Route path="/contact" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <ContactPage />
+            </Suspense>
+          } />
+          <Route path="/careers" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <CareerPage />
+            </Suspense>
+          } />
         </Routes>
         <Footer />
       </Router>
