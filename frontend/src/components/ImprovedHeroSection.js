@@ -457,10 +457,10 @@ const ImprovedHeroSection = ({
           className="max-w-4xl mx-auto"
         >
           {/* Badge */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <span className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-lg px-6 py-3 rounded-full text-sm font-medium border border-blue-400/30">
-              <Sparkles className="w-4 h-4 text-blue-400" />
-              {subtitle}
+          <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
+            <span className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium border border-blue-400/30">
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" />
+              <span className="truncate">{subtitle}</span>
             </span>
           </motion.div>
 
