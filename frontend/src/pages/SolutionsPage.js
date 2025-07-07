@@ -25,6 +25,7 @@ import {
   Users,
   Gauge
 } from 'lucide-react';
+import ModernHeroSection from '../components/ModernHeroSection';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
