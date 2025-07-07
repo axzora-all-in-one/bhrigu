@@ -157,6 +157,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4 bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">Company</h3>
             <ul className="space-y-2 text-gray-400">
               <li><a href="/about" className="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="/careers" className="hover:text-white transition-colors">Careers</a></li>
               <li><a href="/resources" className="hover:text-white transition-colors">Resources</a></li>
               <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
               <li><a href="/products" className="hover:text-white transition-colors">Products</a></li>
