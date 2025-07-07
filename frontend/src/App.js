@@ -78,15 +78,15 @@ import {
   AnimatedSection 
 } from './components/AnimatedSections';
 
-// Import page components
-import SolutionsPage from './pages/SolutionsPage';
-import IndustriesPage from './pages/IndustriesPage';
-import TechnologyPage from './pages/TechnologyPage';
-import AboutPage from './pages/AboutPage';
-import ProductsPage from './pages/ProductsPage';
-import ResourcesPage from './pages/ResourcesPage';
-import ContactPage from './pages/ContactPage';
-import CareerPage from './pages/CareerPage';
+// Lazy load page components for better performance
+const SolutionsPage = lazy(() => import('./pages/SolutionsPage'));
+const IndustriesPage = lazy(() => import('./pages/IndustriesPage'));
+const TechnologyPage = lazy(() => import('./pages/TechnologyPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ProductsPage = lazy(() => import('./pages/ProductsPage'));
+const ResourcesPage = lazy(() => import('./pages/ResourcesPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const CareerPage = lazy(() => import('./pages/CareerPage'));
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
