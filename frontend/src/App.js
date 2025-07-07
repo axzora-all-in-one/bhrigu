@@ -94,6 +94,16 @@ const fadeInUp = {
   transition: { duration: 0.8, ease: "easeOut" }
 };
 
+// Loading component
+const LoadingSpinner = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900">
+    <div className="flex items-center space-x-2">
+      <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+      <span className="text-white text-lg">Loading...</span>
+    </div>
+  </div>
+);
+
 const staggerChildren = {
   animate: {
     transition: {
