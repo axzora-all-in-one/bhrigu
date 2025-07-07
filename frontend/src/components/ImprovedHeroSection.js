@@ -380,70 +380,52 @@ const ImprovedHeroSection = ({
         </motion.div>
       ))}
 
-      {/* Central 3D Illustration - Only for home page */}
+      {/* Central 3D Illustration - Only for home page and desktop */}
       {heroType === "default" && (
-        <div className="absolute inset-0 z-5 flex items-center justify-center">
-          <div className="relative w-96 h-96 hidden lg:block">
+        <div className="absolute inset-0 z-5 hidden xl:flex items-center justify-center">
+          <div className="relative w-80 h-80">
             {/* Central Core */}
             <motion.div
               animate={{ 
                 rotate: 360,
-                scale: [1, 1.1, 1]
+                scale: [1, 1.05, 1]
               }}
               transition={{ 
-                rotate: { duration: 30, repeat: Infinity, ease: "linear" },
-                scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                rotate: { duration: 40, repeat: Infinity, ease: "linear" },
+                scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }
               }}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full shadow-2xl flex items-center justify-center"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full shadow-2xl flex items-center justify-center"
             >
-              <div className="w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                <Cpu className="w-12 h-12 text-white" />
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                <Cpu className="w-8 h-8 text-white" />
               </div>
             </motion.div>
 
-            {/* Orbiting Elements */}
-            {centerElements.map((element, index) => {
-              const x = Math.cos((element.angle * Math.PI) / 180) * element.radius;
-              const y = Math.sin((element.angle * Math.PI) / 180) * element.radius;
+            {/* Reduced Orbiting Elements */}
+            {centerElements.slice(0, 4).map((element, index) => {
+              const x = Math.cos((element.angle * Math.PI) / 180) * (element.radius * 0.8);
+              const y = Math.sin((element.angle * Math.PI) / 180) * (element.radius * 0.8);
               
               return (
                 <motion.div
                   key={index}
-                  className="absolute top-1/2 left-1/2 w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20"
+                  className="absolute top-1/2 left-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20"
                   style={{
                     transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`
                   }}
                   animate={{
                     rotate: [0, 360],
-                    scale: [1, 1.2, 1]
+                    scale: [1, 1.1, 1]
                   }}
                   transition={{
-                    rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 }
+                    rotate: { duration: 25, repeat: Infinity, ease: "linear" },
+                    scale: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.8 }
                   }}
                 >
-                  <element.icon className={`w-8 h-8 ${element.color}`} />
+                  <element.icon className={`w-6 h-6 ${element.color}`} />
                 </motion.div>
               );
             })}
-
-            {/* Connecting Lines */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none">
-              {centerElements.map((_, index) => (
-                <motion.circle
-                  key={index}
-                  cx="50%"
-                  cy="50%"
-                  r={120 + (index * 5)}
-                  fill="none"
-                  stroke="rgba(255,255,255,0.1)"
-                  strokeWidth="1"
-                  strokeDasharray="5,5"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 15 + (index * 2), repeat: Infinity, ease: "linear" }}
-                />
-              ))}
-            </svg>
           </div>
         </div>
       )}
