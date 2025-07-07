@@ -448,25 +448,25 @@ const ImprovedHeroSection = ({
         </div>
       )}
 
-      {/* Particle Effect */}
+      {/* Optimized Particle Effect */}
       <div className="absolute inset-0 z-1">
-        {[...Array(80)].map((_, i) => (
+        {[...Array(40)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-blue-400/50 rounded-full"
+            className="absolute w-0.5 h-0.5 bg-blue-400/30 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              y: [0, -200],
-              opacity: [0, 1, 0],
+              y: [0, -100],
+              opacity: [0, 0.6, 0],
               scale: [0, 1, 0]
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: Math.random() * 2 + 3,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: Math.random() * 3,
             }}
           />
         ))}
