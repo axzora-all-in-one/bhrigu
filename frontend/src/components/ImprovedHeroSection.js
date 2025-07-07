@@ -467,7 +467,7 @@ const ImprovedHeroSection = ({
           {/* Main Title */}
           <motion.h1 
             variants={itemVariants}
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-8 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 sm:mb-8 leading-tight px-2"
           >
             {title}
           </motion.h1>
@@ -475,7 +475,7 @@ const ImprovedHeroSection = ({
           {/* Subtitle */}
           <motion.p 
             variants={itemVariants}
-            className="text-xl lg:text-2xl mb-12 text-gray-300 leading-relaxed max-w-3xl mx-auto"
+            className="text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-12 text-gray-300 leading-relaxed max-w-3xl mx-auto px-4"
           >
             {description}
           </motion.p>
