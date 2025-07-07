@@ -86,6 +86,7 @@ import AboutPage from './pages/AboutPage';
 import ProductsPage from './pages/ProductsPage';
 import ResourcesPage from './pages/ResourcesPage';
 import ContactPage from './pages/ContactPage';
+import CareerPage from './pages/CareerPage';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
