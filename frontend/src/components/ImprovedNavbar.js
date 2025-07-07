@@ -43,25 +43,13 @@ const ImprovedNavbar = () => {
       name: 'Solutions', 
       path: '/solutions', 
       icon: Settings,
-      color: 'from-purple-500 to-pink-500',
-      dropdown: [
-        { name: 'BhriguOne Platform', path: '/solutions#platform' },
-        { name: 'AI Analytics', path: '/solutions#analytics' },
-        { name: 'IoT Integration', path: '/solutions#iot' },
-        { name: 'Compliance Automation', path: '/solutions#compliance' }
-      ]
+      color: 'from-purple-500 to-pink-500'
     },
     { 
       name: 'Industries', 
       path: '/industries', 
       icon: Building,
-      color: 'from-green-500 to-emerald-500',
-      dropdown: [
-        { name: 'Pharmaceuticals', path: '/industries#pharma' },
-        { name: 'Medical Devices', path: '/industries#medical' },
-        { name: 'Food & Beverage', path: '/industries#food' },
-        { name: 'Biotechnology', path: '/industries#biotech' }
-      ]
+      color: 'from-green-500 to-emerald-500'
     },
     { 
       name: 'Technology', 
@@ -85,13 +73,7 @@ const ImprovedNavbar = () => {
       name: 'Resources', 
       path: '/resources', 
       icon: BookOpen,
-      color: 'from-amber-500 to-orange-500',
-      dropdown: [
-        { name: 'Documentation', path: '/resources#docs' },
-        { name: 'Case Studies', path: '/resources#cases' },
-        { name: 'Whitepapers', path: '/resources#papers' },
-        { name: 'Webinars', path: '/resources#webinars' }
-      ]
+      color: 'from-amber-500 to-orange-500'
     },
     { 
       name: 'Contact', 
