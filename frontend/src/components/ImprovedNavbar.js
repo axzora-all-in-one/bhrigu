@@ -194,8 +194,8 @@ const ImprovedNavbar = () => {
                 <div 
                   key={item.name}
                   className="relative"
-                  onMouseEnter={() => setActiveDropdown(null)}
-                  onMouseLeave={() => setActiveDropdown(null)}
+                  onMouseEnter={() => {}}
+                  onMouseLeave={() => {}}
                 >
                   <motion.a
                     href={item.path}
