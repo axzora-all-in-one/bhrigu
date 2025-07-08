@@ -119,13 +119,10 @@ const ImprovedNavbar = () => {
 
   return (
     <motion.nav 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200/50' 
-          : 'bg-white/10 backdrop-blur-md border-b border-white/20'
-      }`}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200/50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
