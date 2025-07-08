@@ -168,18 +168,10 @@ const ImprovedNavbar = () => {
                 
                 {/* Logo Text */}
                 <div className="flex flex-col">
-                  <span className={`text-xl sm:text-2xl font-bold ${
-                    isScrolled 
-                      ? 'text-cyan-600' 
-                      : 'text-white'
-                  }`}>
+                  <span className="text-xl sm:text-2xl font-bold text-cyan-600">
                     Bhrigu
                   </span>
-                  <span className={`text-xs font-medium -mt-1 ${
-                    isScrolled 
-                      ? 'text-cyan-500' 
-                      : 'text-cyan-300'
-                  }`}>
+                  <span className="text-xs font-medium -mt-1 text-cyan-500">
                     FUTURE ENGINEERED
                   </span>
                 </div>
