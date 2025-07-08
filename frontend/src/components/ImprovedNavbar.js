@@ -203,7 +203,7 @@ const ImprovedNavbar = () => {
                     className={`px-3 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2 relative overflow-hidden group ${
                       isScrolled 
                         ? 'text-gray-700 hover:text-white' 
-                        : 'text-white hover:text-white'
+                        : 'text-gray-700 hover:text-white'
                     }`}
                   >
                     {/* Animated background */}
