@@ -257,16 +257,16 @@ const ImprovedNavbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Fixed Height */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white/95 backdrop-blur-md shadow-lg border-t border-gray-200/50 max-h-screen overflow-y-auto"
+            className="lg:hidden bg-white/95 backdrop-blur-md shadow-lg border-t border-gray-200/50"
           >
-            <div className="px-4 pt-4 pb-6 space-y-2 max-h-96 overflow-y-auto">
+            <div className="px-4 pt-4 pb-6 space-y-2">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.name}
@@ -276,11 +276,11 @@ const ImprovedNavbar = () => {
                 >
                   <a
                     href={item.path}
-                    className="flex items-center gap-3 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300"
+                    className="flex items-center gap-3 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 px-4 py-2.5 rounded-xl text-base font-medium transition-all duration-300"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${item.color} flex items-center justify-center`}>
-                      <item.icon size={16} className="text-white" />
+                    <div className={`w-7 h-7 rounded-lg bg-gradient-to-r ${item.color} flex items-center justify-center`}>
+                      <item.icon size={14} className="text-white" />
                     </div>
                     {item.name}
                   </a>
