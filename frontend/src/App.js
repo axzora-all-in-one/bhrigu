@@ -509,6 +509,9 @@ const HomePage = () => {
       {/* Enhanced Technology Stack */}
       <TechnologyStack />
 
+      {/* NEW: Advanced AI-Powered Manufacturing Hero Section */}
+      <Globe3D />
+
       {/* NEW: Live Metrics Dashboard */}
       <LiveMetricsSection />
 
