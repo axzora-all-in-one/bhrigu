@@ -77,6 +77,7 @@ import {
   GlobalNetworkSection,
   AnimatedSection 
 } from './components/AnimatedSections';
+import Globe3D from './components/ui/hero';
 
 // Lazy load page components for better performance
 const SolutionsPage = lazy(() => import('./pages/SolutionsPage'));
